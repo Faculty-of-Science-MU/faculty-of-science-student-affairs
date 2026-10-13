@@ -1,0 +1,2233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/logo-college.png">
+<title>بوابة شؤون الطلاب</title>
+<meta name="description" content="بوابة شؤون الطلاب بكلية العلوم، جامعة المنصورة">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@400;500;700;800&display=swap">
+<style>
+  :root{
+    --bg:#EEF2F8;
+    --bg-2:#F6F2E9;
+    --surface:#FFFFFF;
+    --surface-2:#F7F9FC;
+    --ink:#15233B;
+    --ink-soft:#54637C;
+    --primary:#0B3B6F;
+    --primary-2:#1768A8;
+    --accent:#C8972E;
+    --accent-soft:#F4E6C3;
+    --line:#DCE3EC;
+    --shadow:rgba(16,36,64,.14);
+    --shadow-soft:rgba(16,36,64,.08);
+    --success:#2E8B57;
+    --radius-lg:26px;
+    --radius-md:18px;
+    --radius-sm:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A1522;
+      --bg-2:#0E1B2C;
+      --surface:#122138;
+      --surface-2:#0E1A2C;
+      --ink:#E8EDF6;
+      --ink-soft:#9FB0C8;
+      --primary:#5FA8E8;
+      --primary-2:#3C7FBE;
+      --accent:#E6BE68;
+      --accent-soft:#2B2213;
+      --line:#223552;
+      --shadow:rgba(0,0,0,.45);
+      --shadow-soft:rgba(0,0,0,.3);
+      --success:#4CAF7D;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1522;
+    --bg-2:#0E1B2C;
+    --surface:#122138;
+    --surface-2:#0E1A2C;
+    --ink:#E8EDF6;
+    --ink-soft:#9FB0C8;
+    --primary:#5FA8E8;
+    --primary-2:#3C7FBE;
+    --accent:#E6BE68;
+    --accent-soft:#2B2213;
+    --line:#223552;
+    --shadow:rgba(0,0,0,.45);
+    --shadow-soft:rgba(0,0,0,.3);
+    --success:#4CAF7D;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 500px at 85% -10%, color-mix(in srgb, var(--primary) 10%, transparent), transparent),
+      radial-gradient(900px 480px at 10% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+    direction:rtl;
+    min-height:100vh;
+  }
+  h1,h2,h3,.display{ font-family:"El Messiri","Tajawal",sans-serif; text-wrap:balance; }
+  button{ font-family:inherit; }
+  ::selection{ background:var(--accent-soft); }
+
+  /* ---------- watermark pattern ---------- */
+  .lattice{
+    position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%230B3B6F' stroke-width='1'%3E%3Cpath d='M60 2 L118 60 L60 118 L2 60 Z'/%3E%3Ccircle cx='60' cy='60' r='26'/%3E%3C/g%3E%3C/svg%3E");
+    background-size:120px 120px;
+  }
+
+  .shell{ position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 20px 60px; }
+
+  /* ---------- motion demo bar ---------- */
+  .motion-bar{
+    display:flex; flex-wrap:wrap; align-items:center; gap:10px;
+    max-width:1100px; margin:0 auto; padding:10px 20px;
+    font-size:13px; color:var(--ink-soft);
+  }
+  .motion-bar strong{ color:var(--ink); font-weight:700; }
+  .motion-pills{ display:flex; flex-wrap:wrap; gap:6px; }
+  .motion-pill{
+    border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+    border-radius:999px; padding:6px 14px; font-size:13px; cursor:pointer;
+    transition:all .2s ease;
+  }
+  .motion-pill.active{ background:var(--primary); border-color:var(--primary); color:#fff; font-weight:700; }
+  .motion-bar .hide-btn{
+    margin-right:auto; background:none; border:none; color:var(--ink-soft);
+    cursor:pointer; font-size:13px; text-decoration:underline;
+  }
+  .motion-bar.hidden{ display:none; }
+
+  /* ---------- header ---------- */
+  .site-header{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center;
+    gap:18px; padding:34px 0 20px;
+  }
+  .seal{ width:76px; height:76px; flex:none; filter:drop-shadow(0 6px 14px var(--shadow-soft)); object-fit:contain; }
+  .seal-wrap{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .seal-label{ font-size:11px; color:var(--ink-soft); font-weight:700; letter-spacing:.3px; }
+  .hero-center{ text-align:center; }
+  .hero-eyebrow{
+    display:inline-block; font-size:12.5px; color:var(--primary-2); font-weight:700;
+    letter-spacing:.6px; margin-bottom:6px;
+  }
+  .hero-title{ font-size:clamp(28px,5vw,42px); font-weight:700; margin:0; color:var(--ink); }
+  .hero-underline{
+    width:120px; height:3px; margin:10px auto 0; border-radius:3px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    transform-origin:center;
+  }
+  .hero-sub{ margin:10px 0 0; color:var(--ink-soft); font-size:15px; }
+  .hero-credit{
+    display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:10px 18px;
+    margin-top:22px; padding-top:18px; border-top:1px dashed var(--line);
+  }
+  .hero-credit .person{ font-size:12.5px; color:var(--ink-soft); line-height:1.7; text-align:center; }
+  .hero-credit .person .role{ display:block; }
+  .hero-credit .person b{ display:block; color:var(--primary); font-size:15px; font-weight:800; }
+  .hero-credit .sep{ width:1px; height:26px; background:var(--line); }
+  @media (max-width:520px){ .hero-credit .sep{ display:none; } }
+
+  /* ---------- icon grid ---------- */
+  .grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:34px;
+  }
+  @media (max-width:860px){ .grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .grid{ grid-template-columns:1fr; } }
+
+  .tile{
+    position:relative; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius-lg); padding:26px 18px 22px; text-align:center;
+    cursor:pointer; box-shadow:0 10px 26px var(--shadow-soft);
+    display:flex; flex-direction:column; align-items:center; gap:14px;
+  }
+  .tile .badge{
+    position:absolute; top:12px; left:12px; font-size:10.5px; font-weight:700;
+    background:var(--accent-soft); color:var(--accent); padding:3px 9px; border-radius:999px;
+  }
+  .tile .badge.live{ background:var(--success); color:#fff; }
+  .icon-badge{
+    width:62px; height:62px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(145deg, color-mix(in srgb, var(--primary) 12%, var(--surface)), color-mix(in srgb, var(--primary) 4%, var(--surface)));
+    color:var(--primary);
+  }
+  .icon-badge svg{ width:30px; height:30px; }
+  .tile-label{ font-weight:700; font-size:15px; line-height:1.5; color:var(--ink); }
+
+  /* motion: elegant (default) */
+  body[data-motion="elegant"] .site-header > *{ animation:riseIn .7s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="elegant"] .seal-wrap:first-child{ animation-delay:.05s; }
+  body[data-motion="elegant"] .hero-center{ animation-delay:.15s; }
+  body[data-motion="elegant"] .seal-wrap:last-child{ animation-delay:.05s; }
+  body[data-motion="elegant"] .hero-underline{ animation:underlineGrow 1s .5s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="elegant"] .tile{ animation:riseIn .6s cubic-bezier(.2,.8,.2,1) both; transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease, border-color .3s ease; }
+  body[data-motion="elegant"] .tile:nth-child(1){animation-delay:.05s} body[data-motion="elegant"] .tile:nth-child(2){animation-delay:.1s}
+  body[data-motion="elegant"] .tile:nth-child(3){animation-delay:.15s} body[data-motion="elegant"] .tile:nth-child(4){animation-delay:.2s}
+  body[data-motion="elegant"] .tile:nth-child(5){animation-delay:.25s} body[data-motion="elegant"] .tile:nth-child(6){animation-delay:.3s}
+  body[data-motion="elegant"] .tile:nth-child(7){animation-delay:.35s} body[data-motion="elegant"] .tile:nth-child(8){animation-delay:.4s}
+  body[data-motion="elegant"] .tile:hover{ transform:translateY(-7px); box-shadow:0 18px 34px var(--shadow); border-color:color-mix(in srgb, var(--primary) 30%, var(--line)); }
+  body[data-motion="elegant"] .tile:hover .icon-badge{ color:var(--accent); }
+
+  /* motion: dynamic */
+  body[data-motion="dynamic"] .site-header > *{ animation:riseIn .7s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="dynamic"] .seal-wrap:first-child{ animation-delay:.05s; }
+  body[data-motion="dynamic"] .hero-center{ animation-delay:.15s; }
+  body[data-motion="dynamic"] .hero-underline{ animation:underlineGrow 1s .5s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="dynamic"] .tile{ animation:riseIn .6s cubic-bezier(.2,.8,.2,1) both; transition:transform .35s ease, box-shadow .35s ease; }
+  body[data-motion="dynamic"] .tile:nth-child(1){animation-delay:.05s} body[data-motion="dynamic"] .tile:nth-child(2){animation-delay:.1s}
+  body[data-motion="dynamic"] .tile:nth-child(3){animation-delay:.15s} body[data-motion="dynamic"] .tile:nth-child(4){animation-delay:.2s}
+  body[data-motion="dynamic"] .tile:nth-child(5){animation-delay:.25s} body[data-motion="dynamic"] .tile:nth-child(6){animation-delay:.3s}
+  body[data-motion="dynamic"] .tile:nth-child(7){animation-delay:.35s} body[data-motion="dynamic"] .tile:nth-child(8){animation-delay:.4s}
+  body[data-motion="dynamic"] .icon-badge{ animation:floatY 3.4s ease-in-out infinite; }
+  body[data-motion="dynamic"] .tile:nth-child(odd) .icon-badge{ animation-delay:.3s; }
+  body[data-motion="dynamic"] .tile:hover{ transform:translateY(-8px) rotate(-1deg) scale(1.02); box-shadow:0 20px 40px var(--shadow); }
+  body[data-motion="dynamic"] .tile:hover .icon-badge{ color:var(--accent); animation-play-state:paused; }
+  body[data-motion="dynamic"] .lattice{ animation:driftBg 40s linear infinite; }
+
+  /* motion: minimal */
+  body[data-motion="minimal"] .site-header > *{ animation:fadeIn .25s ease both; }
+  body[data-motion="minimal"] .hero-underline{ width:120px; }
+  body[data-motion="minimal"] .tile{ animation:fadeIn .2s ease both; transition:background .2s ease, border-color .2s ease; box-shadow:0 2px 8px var(--shadow-soft); }
+  body[data-motion="minimal"] .tile:hover{ background:var(--surface-2); border-color:var(--primary); }
+  body[data-motion="minimal"] .tile:hover .icon-badge{ color:var(--accent); }
+
+  /* motion: bounce — جريء / ارتداد مبالغ */
+  body[data-motion="bounce"] .site-header > *{ animation:bounceIn .9s cubic-bezier(.34,1.56,.64,1) both; }
+  body[data-motion="bounce"] .hero-underline{ animation:underlineGrow .6s .5s cubic-bezier(.34,1.56,.64,1) both; }
+  body[data-motion="bounce"] .hero-title{ animation:wiggle 1.8s .9s ease-in-out 1; }
+  body[data-motion="bounce"] .tile{ animation:bounceIn .8s cubic-bezier(.34,1.56,.64,1) both; transition:transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease; }
+  body[data-motion="bounce"] .tile:nth-child(1){animation-delay:.08s} body[data-motion="bounce"] .tile:nth-child(2){animation-delay:.16s}
+  body[data-motion="bounce"] .tile:nth-child(3){animation-delay:.24s} body[data-motion="bounce"] .tile:nth-child(4){animation-delay:.32s}
+  body[data-motion="bounce"] .tile:nth-child(5){animation-delay:.4s} body[data-motion="bounce"] .tile:nth-child(6){animation-delay:.48s}
+  body[data-motion="bounce"] .tile:nth-child(7){animation-delay:.56s} body[data-motion="bounce"] .tile:nth-child(8){animation-delay:.64s}
+  body[data-motion="bounce"] .tile:hover{ transform:scale(1.09) rotate(-3deg); box-shadow:0 24px 50px var(--shadow); }
+  body[data-motion="bounce"] .tile:hover .icon-badge{ color:var(--accent); }
+  body[data-motion="bounce"] .tile.tile-pop{ animation:tileBounceClick .5s cubic-bezier(.34,1.56,.64,1); }
+
+  /* motion: flip3d — جريء / دوران ثلاثي الأبعاد */
+  body[data-motion="flip3d"] .site-header{ perspective:1400px; }
+  body[data-motion="flip3d"] .grid{ perspective:1400px; }
+  body[data-motion="flip3d"] .site-header > *{ animation:flipInY 1s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="flip3d"] .hero-underline{ animation:underlineGrow .7s .6s cubic-bezier(.2,.8,.2,1) both; }
+  body[data-motion="flip3d"] .tile{ animation:flipInY .85s cubic-bezier(.2,.8,.2,1) both; transform-style:preserve-3d; transition:transform .35s ease, box-shadow .35s ease; }
+  body[data-motion="flip3d"] .tile:nth-child(1){animation-delay:.08s} body[data-motion="flip3d"] .tile:nth-child(2){animation-delay:.16s}
+  body[data-motion="flip3d"] .tile:nth-child(3){animation-delay:.24s} body[data-motion="flip3d"] .tile:nth-child(4){animation-delay:.32s}
+  body[data-motion="flip3d"] .tile:nth-child(5){animation-delay:.4s} body[data-motion="flip3d"] .tile:nth-child(6){animation-delay:.48s}
+  body[data-motion="flip3d"] .tile:nth-child(7){animation-delay:.56s} body[data-motion="flip3d"] .tile:nth-child(8){animation-delay:.64s}
+  body[data-motion="flip3d"] .tile:hover{ transform:rotateY(14deg) rotateX(6deg) translateY(-6px); box-shadow:0 26px 48px var(--shadow); }
+  body[data-motion="flip3d"] .tile:hover .icon-badge{ color:var(--accent); }
+  body[data-motion="flip3d"] .tile.tile-pop{ animation:tileFlipClick .6s cubic-bezier(.4,.1,.2,1); }
+
+  /* motion: neon — جريء / نبض متوهج */
+  body[data-motion="neon"] .site-header > *{ animation:neonFadeIn .8s ease both; }
+  body[data-motion="neon"] .hero-underline{ animation:underlineGrow .7s .5s ease both; }
+  body[data-motion="neon"] .icon-badge{ animation:neonGlowPulse 2.1s ease-in-out infinite; }
+  body[data-motion="neon"] .tile{ animation:neonFadeIn .7s ease both; transition:transform .25s ease, box-shadow .25s ease; border-color:color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  body[data-motion="neon"] .tile:nth-child(1){animation-delay:.06s} body[data-motion="neon"] .tile:nth-child(2){animation-delay:.12s}
+  body[data-motion="neon"] .tile:nth-child(3){animation-delay:.18s} body[data-motion="neon"] .tile:nth-child(4){animation-delay:.24s}
+  body[data-motion="neon"] .tile:nth-child(5){animation-delay:.3s} body[data-motion="neon"] .tile:nth-child(6){animation-delay:.36s}
+  body[data-motion="neon"] .tile:nth-child(7){animation-delay:.42s} body[data-motion="neon"] .tile:nth-child(8){animation-delay:.48s}
+  body[data-motion="neon"] .tile:hover{ transform:translateY(-8px) scale(1.04); box-shadow:0 0 36px 8px color-mix(in srgb, var(--accent) 50%, transparent), 0 18px 32px var(--shadow); }
+  body[data-motion="neon"] .tile:hover .icon-badge{ color:var(--accent); animation-play-state:paused; }
+  body[data-motion="neon"] .tile.tile-pop{ animation:tileNeonClick .55s ease; }
+
+  @keyframes riseIn{ from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes underlineGrow{ from{ clip-path:inset(0 50% 0 50%);} to{ clip-path:inset(0 0 0 0);} }
+  @keyframes floatY{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-5px);} }
+  @keyframes driftBg{ from{ background-position:0 0; } to{ background-position:600px 300px; } }
+  @keyframes bounceIn{
+    0%{ opacity:0; transform:scale(.25) translateY(50px) rotate(-6deg); }
+    55%{ opacity:1; transform:scale(1.12) translateY(-10px) rotate(2deg); }
+    75%{ transform:scale(.94) rotate(-1deg); }
+    100%{ opacity:1; transform:scale(1) translateY(0) rotate(0); }
+  }
+  @keyframes wiggle{
+    0%,100%{ transform:rotate(0); } 20%{ transform:rotate(-2.5deg); } 40%{ transform:rotate(2.5deg); }
+    60%{ transform:rotate(-1.5deg); } 80%{ transform:rotate(1.5deg); }
+  }
+  @keyframes tileBounceClick{
+    0%{ transform:scale(1) rotate(0); } 30%{ transform:scale(1.18) rotate(-4deg); }
+    55%{ transform:scale(.9) rotate(3deg); } 80%{ transform:scale(1.05) rotate(-1deg); } 100%{ transform:scale(1) rotate(0); }
+  }
+  @keyframes flipInY{
+    0%{ opacity:0; transform:perspective(900px) rotateY(100deg); }
+    60%{ opacity:1; transform:perspective(900px) rotateY(-14deg); }
+    100%{ opacity:1; transform:perspective(900px) rotateY(0); }
+  }
+  @keyframes tileFlipClick{
+    0%{ transform:perspective(700px) rotateY(0) scale(1); }
+    50%{ transform:perspective(700px) rotateY(180deg) scale(1.06); }
+    100%{ transform:perspective(700px) rotateY(360deg) scale(1); }
+  }
+  @keyframes neonFadeIn{
+    0%{ opacity:0; transform:scale(.8); }
+    60%{ opacity:1; transform:scale(1.05); }
+    100%{ opacity:1; transform:scale(1); }
+  }
+  @keyframes neonGlowPulse{
+    0%,100%{ box-shadow:0 0 0 0 transparent; }
+    50%{ box-shadow:0 0 26px 5px color-mix(in srgb, var(--accent) 55%, transparent); }
+  }
+  @keyframes tileNeonClick{
+    0%{ box-shadow:0 0 0 0 transparent; }
+    50%{ box-shadow:0 0 0 10px color-mix(in srgb, var(--accent) 0%, transparent), 0 0 40px 10px color-mix(in srgb, var(--accent) 75%, transparent); }
+    100%{ box-shadow:0 0 0 0 transparent; }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+
+  /* ---------- footer ---------- */
+  .site-footer{ text-align:center; color:var(--ink-soft); font-size:13px; margin-top:28px; }
+
+  /* ---------- modal (coming soon) ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(10,20,35,.45); backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center; z-index:50; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .overlay.open{ opacity:1; pointer-events:auto; }
+  .modal{
+    background:var(--surface); border-radius:var(--radius-md); padding:28px 26px; max-width:360px;
+    width:100%; text-align:center; box-shadow:0 24px 60px var(--shadow); transform:translateY(10px); transition:transform .25s ease;
+  }
+  .overlay.open .modal{ transform:translateY(0); }
+  .modal .icon-badge{ margin:0 auto 14px; }
+  .modal h3{ margin:0 0 8px; font-size:19px; }
+  .modal p{ margin:0 0 18px; color:var(--ink-soft); font-size:14px; line-height:1.7; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border:none; border-radius:999px; padding:11px 22px; font-weight:700; font-size:14.5px;
+    cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background .2s ease;
+  }
+  .btn-primary{ background:linear-gradient(135deg, var(--primary), var(--primary-2)); color:#fff; box-shadow:0 10px 22px color-mix(in srgb, var(--primary) 35%, transparent); }
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; }
+  .btn-ghost{ background:var(--surface-2); color:var(--ink); border:1px solid var(--line); }
+  .btn-ghost:hover{ background:var(--line); }
+
+  /* ================= MODULE FORM SCREEN ================= */
+  #screen-form{ display:none; }
+  .back-row{ padding-top:22px; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:6px; color:var(--primary-2); text-decoration:none;
+    font-weight:700; font-size:14.5px; cursor:pointer; background:none; border:none; padding:0;
+  }
+  .back-link:hover{ text-decoration:underline; }
+
+  .module-header{
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px; padding:16px 0 8px;
+  }
+  .module-header .seal{ width:58px; height:58px; }
+  .module-title{ text-align:center; }
+  .module-title h1{ font-size:clamp(22px,4vw,30px); margin:0; }
+  .module-title p{ margin:6px 0 0; color:var(--ink-soft); font-size:13.5px; }
+
+  .idea-layout{ display:grid; grid-template-columns:1.5fr 1fr; gap:24px; margin-top:28px; align-items:start; }
+  @media (max-width:860px){ .idea-layout{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:30px; box-shadow:0 14px 34px var(--shadow-soft);
+  }
+  .card h2{ margin:0 0 4px; font-size:21px; }
+  .card .muted{ color:var(--ink-soft); font-size:13.5px; margin:0 0 22px; }
+
+  .field{ margin-bottom:20px; }
+  .field label{ display:block; font-weight:700; font-size:14px; margin-bottom:8px; color:var(--ink); }
+  .field .opt{ font-weight:400; color:var(--ink-soft); font-size:12.5px; }
+  .field .req{ color:#C0392B; font-weight:700; }
+  .field input[type="text"],
+  .field select,
+  .field textarea{
+    width:100%; border:1.5px solid var(--line); background:var(--surface-2); color:var(--ink);
+    border-radius:var(--radius-sm); padding:12px 14px; font-size:14.5px; font-family:inherit;
+    transition:border-color .2s ease, box-shadow .2s ease;
+  }
+  .field input::placeholder, .field textarea::placeholder{ color:color-mix(in srgb, var(--ink-soft) 80%, transparent); }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--primary-2); box-shadow:0 0 0 4px color-mix(in srgb, var(--primary-2) 15%, transparent);
+  }
+  .field select:disabled{ opacity:.55; cursor:not-allowed; }
+  .field textarea{ min-height:150px; resize:vertical; line-height:1.8; }
+  .char-count{ text-align:left; font-size:12px; color:var(--ink-soft); margin-top:6px; font-variant-numeric:tabular-nums; }
+
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:520px){ .two-col{ grid-template-columns:1fr; } }
+
+  .dropzone{
+    border:1.5px dashed var(--line); border-radius:var(--radius-sm); padding:18px; text-align:center;
+    cursor:pointer; background:var(--surface-2); transition:border-color .2s ease, background .2s ease;
+  }
+  .dropzone:hover{ border-color:var(--primary-2); }
+  .dropzone svg{ width:28px; height:28px; color:var(--primary-2); margin-bottom:6px; }
+  .dropzone .dz-text{ font-size:13.5px; color:var(--ink-soft); }
+  .dropzone .dz-text strong{ color:var(--primary-2); }
+  .preview-wrap{ display:flex; align-items:center; gap:14px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:10px 14px; }
+  .preview-wrap img{ width:56px; height:56px; object-fit:cover; border-radius:10px; }
+  .preview-wrap .pv-name{ flex:1; font-size:13px; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .pv-remove{ background:none; border:none; color:#C0392B; font-weight:700; cursor:pointer; font-size:13px; }
+
+  .submit-row{ margin-top:26px; display:flex; justify-content:flex-end; }
+  .error-msg{ color:#C0392B; font-size:13px; margin-top:-10px; margin-bottom:16px; display:none; }
+  .error-msg.show{ display:block; }
+
+  /* side info card */
+  .info-card{ position:sticky; top:20px; }
+  .info-card h3{ font-size:16px; margin:0 0 12px; }
+  .info-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px; }
+  .info-list li{ display:flex; gap:10px; font-size:13.5px; color:var(--ink-soft); line-height:1.7; }
+  .info-list .dot{ flex:none; width:8px; height:8px; border-radius:50%; background:var(--accent); margin-top:7px; }
+  .year-chip{
+    display:inline-block; margin-top:16px; background:var(--accent-soft); color:var(--accent);
+    font-weight:700; font-size:12.5px; padding:6px 14px; border-radius:999px;
+  }
+
+  /* success panel */
+  #success-panel{ display:none; }
+  .success-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:22px; }
+  .check-circle{
+    width:64px; height:64px; border-radius:50%; background:color-mix(in srgb, var(--success) 15%, transparent);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .check-circle svg{ width:32px; height:32px; color:var(--success); }
+  .review-name{ color:var(--primary); font-weight:800; font-size:24px; font-family:"El Messiri",sans-serif; }
+  .review-card{ background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:20px; margin:18px 0; text-align:right; }
+  .review-row{ display:flex; gap:8px; font-size:13.5px; padding:6px 0; border-bottom:1px dashed var(--line); }
+  .review-row:last-child{ border-bottom:none; }
+  .review-row .k{ color:var(--ink-soft); min-width:110px; font-weight:700; }
+  .review-row .v{ color:var(--ink); flex:1; }
+  .review-idea{ margin-top:10px; padding-top:10px; border-top:1px dashed var(--line); font-size:13.5px; line-height:1.8; white-space:pre-wrap; }
+  .action-row{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:18px; }
+  .hint{ font-size:12.5px; color:var(--ink-soft); text-align:center; margin-top:14px; }
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0;
+    background:var(--ink); color:var(--bg); padding:10px 20px; border-radius:999px; font-size:13.5px;
+    transition:all .3s ease; z-index:80; pointer-events:none;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .saved-note{
+    display:flex; align-items:center; justify-content:center; gap:8px; margin-top:16px;
+    font-size:13px; color:var(--success); font-weight:700;
+  }
+
+  /* ================= ADMIN SCREEN ================= */
+  #screen-admin{ display:none; }
+  .admin-link{
+    display:inline-flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer;
+    color:var(--ink-soft); font-size:12.5px; font-family:inherit; text-decoration:underline; padding:0;
+  }
+  .admin-link:hover{ color:var(--primary-2); }
+
+  .mode-banner{
+    display:flex; align-items:flex-start; gap:10px; border-radius:var(--radius-md); padding:14px 18px;
+    font-size:13px; line-height:1.7; margin-bottom:20px; border:1px solid var(--line);
+  }
+  .mode-banner.local{ background:color-mix(in srgb, var(--accent) 12%, var(--surface)); border-color:color-mix(in srgb, var(--accent) 40%, var(--line)); color:var(--ink); }
+  .mode-banner.remote{ background:color-mix(in srgb, var(--success) 12%, var(--surface)); border-color:color-mix(in srgb, var(--success) 40%, var(--line)); color:var(--ink); }
+  .mode-banner b{ display:block; margin-bottom:2px; }
+
+  .stats-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+  @media (max-width:620px){ .stats-row{ grid-template-columns:1fr; } }
+  .stat-tile{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:18px 20px; box-shadow:0 8px 20px var(--shadow-soft);
+  }
+  .stat-tile .k{ font-size:12.5px; color:var(--ink-soft); font-weight:700; }
+  .stat-tile .v{
+    font-size:30px; font-weight:800; color:var(--primary); font-family:"El Messiri",sans-serif;
+    line-height:1.3; font-variant-numeric:tabular-nums;
+  }
+
+  .toolbar{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:18px; padding:16px 18px; }
+  .filter-pill{
+    border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft);
+    border-radius:999px; padding:7px 16px; font-size:13px; cursor:pointer; font-family:inherit;
+    transition:all .2s ease;
+  }
+  .filter-pill.active{ background:var(--primary); border-color:var(--primary); color:#fff; font-weight:700; }
+  .toolbar input[type="search"]{
+    flex:1; min-width:180px; border:1.5px solid var(--line); background:var(--surface-2); color:var(--ink);
+    border-radius:var(--radius-sm); padding:9px 14px; font-size:14px; font-family:inherit;
+  }
+  .toolbar input[type="search"]:focus{ outline:none; border-color:var(--primary-2); }
+  .toolbar .spacer{ flex:1; }
+
+  .sub-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:20px 22px; margin-bottom:14px; box-shadow:0 6px 18px var(--shadow-soft);
+  }
+  .sub-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; margin-bottom:10px; }
+  .sub-name{ font-family:"El Messiri",sans-serif; font-size:22px; font-weight:800; color:var(--primary); }
+  .type-chip{ font-size:11.5px; font-weight:700; padding:4px 11px; border-radius:999px; }
+  .type-chip.idea{ background:var(--accent-soft); color:var(--accent); }
+  .type-chip.question{ background:color-mix(in srgb, var(--primary-2) 15%, transparent); color:var(--primary-2); }
+  .sub-date{ margin-right:auto; font-size:12px; color:var(--ink-soft); }
+  .sub-meta{ display:flex; flex-wrap:wrap; gap:8px 18px; font-size:13px; color:var(--ink-soft); margin-bottom:12px; }
+  .sub-meta span b{ color:var(--ink); font-weight:700; }
+  .sub-body{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:14px 16px; font-size:14px; line-height:1.9; white-space:pre-wrap; color:var(--ink);
+  }
+  .sub-img{ margin-top:12px; }
+  .sub-img img{ max-width:220px; border-radius:var(--radius-sm); border:1px solid var(--line); cursor:zoom-in; display:block; }
+  .sub-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .mini-btn{
+    border:1px solid var(--line); background:var(--surface-2); color:var(--ink); border-radius:999px;
+    padding:6px 14px; font-size:12.5px; cursor:pointer; font-family:inherit; transition:background .2s ease;
+  }
+  .mini-btn:hover{ background:var(--line); }
+  .mini-btn.danger{ color:#C0392B; }
+
+  .empty-state{ text-align:center; padding:60px 20px; color:var(--ink-soft); }
+  .empty-state .big{ font-size:46px; margin-bottom:10px; }
+
+  .lightbox{
+    position:fixed; inset:0; background:rgba(8,16,28,.82); display:none; align-items:center;
+    justify-content:center; z-index:90; padding:24px; cursor:zoom-out;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox img{ max-width:100%; max-height:100%; border-radius:12px; }
+
+  .tool-sep{ width:1px; height:24px; background:var(--line); }
+  .reply-modal{ max-width:480px; text-align:right; }
+  .reply-modal h3{ text-align:center; }
+  .reply-to{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:10px 14px; font-size:13px; color:var(--ink-soft); margin-bottom:16px;
+  }
+  .reply-to b{ color:var(--ink); }
+  .reply-note{ font-size:12.5px; color:var(--ink-soft); margin:-6px 0 14px; line-height:1.7; }
+  .reply-note.err{ color:#C0392B; font-weight:700; }
+  .mini-btn.reply-btn{ background:var(--primary); color:#fff; border-color:var(--primary); }
+  .mini-btn.reply-btn:hover{ background:var(--primary-2); }
+  .mini-btn[disabled]{ opacity:.5; cursor:not-allowed; }
+  .demo-chip{ font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:999px; background:var(--line); color:var(--ink-soft); }
+
+  /* ---------- view tabs ---------- */
+  .view-tabs{ display:flex; gap:8px; margin-bottom:22px; flex-wrap:wrap; }
+  .view-tab{
+    border:1px solid var(--line); background:var(--surface); color:var(--ink-soft);
+    border-radius:var(--radius-sm); padding:11px 22px; font-size:14.5px; font-weight:700;
+    cursor:pointer; font-family:inherit; transition:all .2s ease;
+  }
+  .view-tab.active{
+    background:linear-gradient(135deg, var(--primary), var(--primary-2)); color:#fff;
+    border-color:transparent; box-shadow:0 8px 20px color-mix(in srgb, var(--primary) 30%, transparent);
+  }
+
+  /* ---------- quality report ---------- */
+  .report-head{
+    background:linear-gradient(135deg, color-mix(in srgb, var(--primary) 94%, #000), var(--primary-2));
+    border-radius:var(--radius-lg); padding:30px 32px; color:#fff; margin-bottom:22px;
+    box-shadow:0 16px 36px color-mix(in srgb, var(--primary) 32%, transparent);
+  }
+  .report-head .vision{
+    display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:7px 18px;
+    font-size:13px; font-weight:700; margin-bottom:16px;
+  }
+  .report-head h2{ margin:0 0 8px; font-size:27px; color:#fff; }
+  .report-head p{ margin:0; font-size:14px; line-height:1.9; color:rgba(255,255,255,.9); max-width:70ch; }
+  .report-head .stamp{ margin-top:16px; font-size:12.5px; color:rgba(255,255,255,.75); }
+
+  .score-wrap{ display:grid; grid-template-columns:260px 1fr; gap:22px; margin-bottom:22px; }
+  @media (max-width:760px){ .score-wrap{ grid-template-columns:1fr; } }
+  .score-card{ text-align:center; }
+  .score-ring{ position:relative; width:170px; height:170px; margin:6px auto 12px; }
+  .score-ring .val{
+    position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .score-ring .num{ font-family:"El Messiri",sans-serif; font-size:42px; font-weight:800; color:var(--primary); line-height:1; }
+  .score-ring .of{ font-size:12px; color:var(--ink-soft); margin-top:4px; }
+  .score-label{ font-weight:800; font-size:16px; color:var(--ink); }
+  .score-sub{ font-size:12.5px; color:var(--ink-soft); margin-top:4px; }
+
+  .kpi-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+  .kpi{
+    background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:14px 16px;
+  }
+  .kpi .k{ font-size:12px; color:var(--ink-soft); font-weight:700; margin-bottom:5px; }
+  .kpi .v{ font-size:21px; font-weight:800; color:var(--primary); font-variant-numeric:tabular-nums; }
+  .kpi .v small{ font-size:12px; color:var(--ink-soft); font-weight:500; }
+
+  .finding-list{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:11px; }
+  .finding-list li{ display:flex; gap:10px; font-size:13.5px; line-height:1.85; color:var(--ink); }
+  .finding-list .mark{ flex:none; width:22px; text-align:center; }
+
+  .chart-card{ margin-bottom:20px; }
+  .chart-card h3{ margin:0 0 4px; font-size:17px; }
+  .chart-card .cap{ margin:0 0 16px; font-size:12.5px; color:var(--ink-soft); }
+  .chart-scroll{ overflow-x:auto; }
+  .chart-scroll svg{ display:block; min-width:520px; width:100%; height:auto; }
+  .legend{ display:flex; flex-wrap:wrap; gap:16px; margin-top:12px; font-size:12.5px; color:var(--ink-soft); }
+  .legend i{ display:inline-block; width:12px; height:12px; border-radius:3px; margin-left:6px; vertical-align:-1px; }
+
+  /* ---------- print ---------- */
+  @media print{
+    .no-print, .motion-bar, .back-row, .view-tabs, .lattice, .sub-actions, .seal-label{ display:none !important; }
+    body{ background:#fff !important; }
+    .shell{ max-width:100%; padding:0; }
+    .card, .sub-card, .stat-tile{ box-shadow:none !important; border:1px solid #ccc !important; break-inside:avoid; }
+    .report-head{ box-shadow:none !important; }
+    .chart-scroll svg{ min-width:0; }
+  }
+</style>
+<style>
+  body{ margin:0; }
+  img{ max-width:100%; }
+  [hidden]{ display:none !important; }
+</style>
+</head>
+<body>
+<div class="lattice"></div>
+
+<div class="motion-bar" id="motionBar">
+  <span>💫 <strong>قبل ما نثبّت الشكل:</strong> جرّب طابع الحركة اللي يعجبك أكتر</span>
+  <span class="motion-pills">
+    <button class="motion-pill active" data-motion="elegant">أنيق هادئ</button>
+    <button class="motion-pill" data-motion="dynamic">حيوي نابض</button>
+    <button class="motion-pill" data-motion="minimal">بسيط سريع</button>
+    <button class="motion-pill" data-motion="bounce">🎉 ارتداد جريء</button>
+    <button class="motion-pill" data-motion="flip3d">🌀 دوران 3D</button>
+    <button class="motion-pill" data-motion="neon">✨ نبض متوهج</button>
+  </span>
+  <button class="hide-btn" id="hideMotionBar">إخفاء</button>
+</div>
+
+<!-- ============ HUB SCREEN ============ -->
+<div id="screen-hub" class="shell">
+  <header class="site-header">
+    <div class="seal-wrap">
+      <img class="seal" src="assets/logo-university.png" alt="شعار جامعة المنصورة">
+      <span class="seal-label">جامعة المنصورة</span>
+    </div>
+
+    <div class="hero-center">
+      <span class="hero-eyebrow">كلية العلوم</span>
+      <h1 class="hero-title">شؤون الطلاب</h1>
+      <div class="hero-underline"></div>
+      <p class="hero-sub">بوابتك لكل خدمات شؤون الطلاب في مكان واحد</p>
+    </div>
+
+    <div class="seal-wrap">
+      <img class="seal" src="assets/logo-college.png" alt="شعار كلية العلوم">
+      <span class="seal-label">كلية العلوم</span>
+    </div>
+  </header>
+
+  <nav class="grid" id="hubGrid">
+    <!-- tiles injected by JS -->
+  </nav>
+
+  <div class="hero-credit">
+    <span class="person"><span class="role">عميد الكلية</span><b>أ.د/ إيهاب عبد اللطيف</b></span>
+    <span class="sep"></span>
+    <span class="person"><span class="role">وكيل الكلية لشؤون الطلاب</span><b>أ.د/ محسن زهران</b></span>
+  </div>
+
+  <p class="site-footer">جامعة المنصورة — كلية العلوم · إدارة شؤون الطلاب</p>
+</div>
+
+<!-- ============ ADMIN SCREEN ============ -->
+<div id="screen-admin" class="shell">
+  <div class="back-row">
+    <button class="back-link" id="adminBackBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 6l-6 6 6 6"/></svg>
+      الرئيسية
+    </button>
+  </div>
+
+  <header class="module-header">
+    <img class="seal" src="assets/logo-university.png" alt="شعار جامعة المنصورة">
+    <div class="module-title">
+      <h1>لوحة المشرف</h1>
+      <p>كل الطلبات اللي بعتها الطلاب من الموقع في مكان واحد</p>
+    </div>
+    <img class="seal" src="assets/logo-college.png" alt="شعار كلية العلوم">
+  </header>
+
+  <div class="card" id="adminGate" style="max-width:430px;margin:30px auto;">
+    <h2>دخول المشرف</h2>
+    <p class="muted">اكتب كلمة المرور للاطلاع على طلبات الطلاب</p>
+    <div class="field" style="margin-bottom:10px;">
+      <label for="adminPass">كلمة المرور</label>
+      <input type="text" id="adminPass" placeholder="••••••••" autocomplete="off">
+      <div class="error-msg" id="err-pass">كلمة المرور غير صحيحة</div>
+    </div>
+    <button type="button" class="btn btn-primary" id="adminLogin" style="width:100%;">دخول</button>
+  </div>
+
+  <div id="adminPanel" style="display:none;">
+    <div class="view-tabs no-print">
+      <button class="view-tab active" data-view="requests">📥 طلبات الطلاب</button>
+      <button class="view-tab" data-view="quality">📊 إحصائيات الجودة</button>
+    </div>
+
+    <div id="view-requests">
+      <div class="mode-banner no-print" id="modeBanner"></div>
+
+      <div class="stats-row">
+        <div class="stat-tile"><div class="k">إجمالي الطلبات</div><div class="v" id="statAll">0</div></div>
+        <div class="stat-tile"><div class="k">أفكار إبداعية وريادة أعمال</div><div class="v" id="statIdea">0</div></div>
+        <div class="stat-tile"><div class="k">أسئلة واستفسارات</div><div class="v" id="statQuestion">0</div></div>
+      </div>
+
+      <div class="card toolbar no-print">
+        <button class="filter-pill active" data-filter="all">الكل</button>
+        <button class="filter-pill" data-filter="idea">أفكار إبداعية</button>
+        <button class="filter-pill" data-filter="question">أسئلة واستفسارات</button>
+        <input type="search" id="adminSearch" placeholder="ابحث بالاسم أو القسم أو النص...">
+        <span class="tool-sep"></span>
+        <button class="mini-btn" id="refreshBtn">🔄 تحديث</button>
+        <button class="mini-btn" id="exportExcelBtn">📊 تحويل لإكسل</button>
+        <button class="mini-btn" id="exportBtn">⬇️ تحميل الطلبات</button>
+        <button class="mini-btn" id="printBtn">🖨 طباعة</button>
+        <button class="mini-btn danger" id="clearDemoBtn">🧹 مسح البيانات التجريبية</button>
+      </div>
+
+      <div id="subList"></div>
+    </div>
+
+    <div id="view-quality" style="display:none;"></div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
+<div class="overlay" id="replyOverlay">
+  <div class="modal reply-modal">
+    <h3>📧 الرد على الطالب</h3>
+    <div class="reply-to" id="replyTo"></div>
+
+    <div class="field" style="text-align:right;">
+      <label for="replySubject">موضوع الرسالة</label>
+      <input type="text" id="replySubject">
+    </div>
+    <div class="field" style="text-align:right;">
+      <label for="replyMessage">نص الرد</label>
+      <textarea id="replyMessage" placeholder="اكتبي ردك هنا... (الشعارات واسم الموقع هيتضافوا تلقائيًا فوق وتحت)" style="min-height:140px;"></textarea>
+    </div>
+    <div class="reply-note" id="replyNote"></div>
+
+    <div class="action-row">
+      <button type="button" class="btn btn-primary" id="replySendBtn">إرسال الرد</button>
+      <button type="button" class="btn btn-ghost" id="replyCancelBtn">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODULE FORM SCREEN ============ -->
+<div id="screen-form" class="shell">
+  <div class="back-row">
+    <button class="back-link" id="backBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 6l-6 6 6 6"/></svg>
+      الرئيسية
+    </button>
+  </div>
+
+  <header class="module-header">
+    <img class="seal" src="assets/logo-university.png" alt="شعار جامعة المنصورة">
+    <div class="module-title">
+      <h1 id="moduleTitle">أفكار إبداعية وريادة أعمال</h1>
+      <p id="moduleSubtitle">شارك فكرتك، وخلّيها أول خطوة في مشروعك القادم</p>
+    </div>
+    <img class="seal" src="assets/logo-college.png" alt="شعار كلية العلوم">
+  </header>
+
+  <div class="idea-layout">
+    <div class="card" id="form-card">
+      <h2 id="formCardTitle">بيانات الفكرة</h2>
+      <p class="muted">البيانات اللي هتكتبها هتتجهّز في رسالة لإدارة شؤون الطلاب — خطوة واحدة وتخلص</p>
+
+      <form id="ideaForm" novalidate>
+        <div class="field">
+          <label for="studentName">اسم الطالب <span class="req">*</span></label>
+          <input type="text" id="studentName" placeholder="اكتب اسمك بالكامل" required>
+          <div class="error-msg" id="err-name">من فضلك اكتب اسمك</div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="studentEmail">البريد الإلكتروني <span class="req">*</span></label>
+            <input type="email" id="studentEmail" placeholder="example@gmail.com" autocomplete="email" required>
+            <div class="error-msg" id="err-email">من فضلك اكتب بريد إلكتروني صحيح</div>
+          </div>
+          <div class="field">
+            <label for="studentPhone">رقم الهاتف <span class="req">*</span></label>
+            <input type="tel" id="studentPhone" placeholder="01xxxxxxxxx" autocomplete="tel" required>
+            <div class="error-msg" id="err-phone">من فضلك اكتب رقم الهاتف</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="studentYear">الفرقة <span class="req">*</span></label>
+            <select id="studentYear" required>
+              <option value="">اختر الفرقة</option>
+              <option>الفرقة الأولى</option>
+              <option>الفرقة الثانية</option>
+              <option>الفرقة الثالثة</option>
+              <option>الفرقة الرابعة</option>
+            </select>
+            <div class="error-msg" id="err-year">من فضلك اختر الفرقة</div>
+          </div>
+          <div class="field">
+            <label for="studentDept">القسم <span class="req">*</span></label>
+            <select id="studentDept" required>
+              <option value="">اختر القسم</option>
+            </select>
+            <div class="error-msg" id="err-dept">من فضلك اختر القسم</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="studentProgram">البرنامج النوعي <span class="opt" id="programHint">(اختر القسم أولًا)</span></label>
+          <select id="studentProgram" disabled>
+            <option value="">—</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="ideaText" id="mainFieldLabel">فكرتك الإبداعية <span class="req">*</span></label>
+          <textarea id="ideaText" placeholder="احكيلنا عن فكرتك: إيه المشكلة اللي بتحلها، وإزاي هتنفذها..." required></textarea>
+          <div class="char-count"><span id="charCount">0</span> حرف</div>
+          <div class="error-msg" id="err-idea">من فضلك اكتب تفاصيل فكرتك</div>
+        </div>
+
+        <div class="field" id="imageField">
+          <label>صورة توضيحية <span class="opt">(اختياري)</span></label>
+          <div class="dropzone" id="dropzone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+            <div class="dz-text"><strong>اضغط لإرفاق صورة</strong> أو اسحبها هنا</div>
+          </div>
+          <input type="file" id="imageInput" accept="image/*" hidden>
+          <div class="preview-wrap" id="previewWrap" style="display:none;">
+            <img id="previewImg" alt="">
+            <span class="pv-name" id="previewName"></span>
+            <button type="button" class="pv-remove" id="removeImage">إزالة</button>
+          </div>
+        </div>
+
+        <div class="submit-row">
+          <button type="submit" class="btn btn-primary" id="submitBtn">إرسال الفكرة ←</button>
+        </div>
+      </form>
+    </div>
+
+    <aside class="card info-card">
+      <h3 id="infoTitle">قبل ما تبعت فكرتك</h3>
+      <ul class="info-list" id="infoList"></ul>
+      <span class="year-chip" id="yearChip"></span>
+    </aside>
+
+    <div class="card" id="success-panel" style="grid-column:1/-1;">
+      <div class="success-head">
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2 id="successTitle">فكرتك جاهزة للإرسال</h2>
+        <div class="review-name" id="reviewName"></div>
+      </div>
+
+      <div class="review-card" id="reviewCard"></div>
+
+      <div class="saved-note" id="savedNote" style="display:none;"></div>
+
+      <p class="hint" style="margin-top:0;">الصفحة مش متصلة بسيرفر — الطريقة المضمونة إنك تنسخي البيانات أو تنزّليها وتبعتيها بنفسك (واتساب / إيميل / أي طريقة تريحك)</p>
+      <div class="action-row">
+        <button type="button" class="btn btn-primary" id="copyBtn">📋 نسخ تفاصيل الفكرة</button>
+        <button type="button" class="btn btn-primary" id="downloadTxtBtn">⬇️ تنزيل الفكرة كملف</button>
+        <button type="button" class="btn btn-ghost" id="downloadImgBtn" style="display:none;">⬇️ تنزيل الصورة لإرفاقها</button>
+      </div>
+      <div class="action-row">
+        <a href="#" id="mailBtn" class="btn btn-ghost" target="_blank" rel="noopener">📧 محاولة الإرسال عبر البريد (قد لا يعمل تلقائيًا على كل الأجهزة)</a>
+      </div>
+      <div class="action-row">
+        <button type="button" class="btn btn-ghost" id="newIdeaBtn">إرسال فكرة تانية</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="soonOverlay">
+  <div class="modal">
+    <div class="icon-badge" id="soonIcon" style="margin:0 auto 14px;"></div>
+    <h3 id="soonTitle"></h3>
+    <p>هذه الخدمة قيد التجهيز حاليًا وستتوفر قريبًا بإذن الله ضمن بوابة شؤون الطلاب.</p>
+    <button class="btn btn-primary" id="soonClose">تمام</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ======================================================================
+     ١) الإعدادات — عدّل من هنا فقط
+     ====================================================================== */
+
+  // كلمة مرور صفحة المشرف — غيّرها لما تحب
+  var ADMIN_PASSWORD = "science2026";
+
+  // رابط الخادم (Google Apps Script) لاستقبال الطلبات من كل الأجهزة.
+  // سيبه فاضي "" = وضع التجربة (الطلبات تتحفظ على نفس الجهاز بس).
+  var SERVER_URL = "";
+
+  /* ====================================================================== */
+
+  var STORAGE_KEY = "fos-student-affairs-submissions";
+
+  var Store = {
+    mode: function(){ return SERVER_URL ? "remote" : "local"; },
+
+    add: function(item){
+      if (SERVER_URL){
+        return fetch(SERVER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "add", item: item })
+        }).then(function(res){ return res.json(); }).then(function(out){
+          if (!out || out.ok !== true) throw new Error("server refused");
+          return true;
+        });
+      }
+      return new Promise(function(resolve, reject){
+        try{
+          var all = Store._readLocal();
+          all.push(item);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+          resolve(true);
+        } catch(e){ reject(e); }
+      });
+    },
+
+    list: function(){
+      if (SERVER_URL){
+        return fetch(SERVER_URL + "?action=list", { method: "GET" })
+          .then(function(res){ return res.json(); })
+          .then(function(out){ return (out && out.items) ? out.items : []; });
+      }
+      return Promise.resolve(Store._readLocal());
+    },
+
+    remove: function(id){
+      if (SERVER_URL){
+        return fetch(SERVER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "delete", id: id })
+        }).then(function(res){ return res.json(); }).then(function(){ return true; });
+      }
+      return new Promise(function(resolve){
+        var all = Store._readLocal().filter(function(x){ return x.id !== id; });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+        resolve(true);
+      });
+    },
+
+    _readLocal: function(){
+      try{
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch(e){ return []; }
+    },
+
+    // إرسال إيميل رد للطالب — محتاج خادم حقيقي متصل (SERVER_URL)، مش متاح في وضع التجربة
+    sendEmail: function(payload){
+      if (!SERVER_URL){
+        return Promise.reject({ code: 'no_server' });
+      }
+      return fetch(SERVER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'sendEmail', payload: payload })
+      }).then(function(res){ return res.json(); }).then(function(out){
+        if (!out || out.ok !== true) throw new Error(out && out.error || 'send failed');
+        return true;
+      });
+    }
+  };
+
+  /* ---------------- بيانات تجريبية (تتمسح بضغطة من لوحة المشرف) ---------------- */
+
+  var DEMO = [
+    ['idea','سارة محمد عبد الرحمن','الفرقة الثالثة','قسم جيولوجيا','جيولوجيا البترول والتعدين','مشروع لإعادة تدوير مخلفات المحاجر في محافظة الدقهلية وتحويلها إلى طوب بناء خفيف الوزن وعازل للحرارة، مع دراسة جدوى مبدئية توضح انخفاض التكلفة مقارنة بالطوب التقليدي.',1],
+    ['idea','أحمد إبراهيم السيد','الفرقة الرابعة','قسم الكيمياء','البتروكيماويات وتطبيقاتها','تطوير مذيب صديق للبيئة يحل محل المذيبات العضوية الضارة المستخدمة في معامل الكلية، باستخدام مشتقات طبيعية رخيصة ومتاحة محليًا.',2],
+    ['idea','منة الله طارق فؤاد','الفرقة الثانية','قسم علم النبات','التكنولوجيا الحيوية وتطبيقاتها','إنتاج سماد حيوي من قش الأرز بدل حرقه، باستخدام سلالات بكتيرية محلية تسرّع التحلل وترفع نسبة النيتروجين في الناتج.',2],
+    ['idea','يوسف عادل حسن','الفرقة الثالثة','قسم الفيزياء','برنامج الفيزياء الطبية','جهاز منخفض التكلفة لقياس جرعة الإشعاع في معامل الأشعة، يعتمد على حساسات متاحة تجاريًا مع واجهة قراءة رقمية بسيطة.',3],
+    ['idea','نورهان مصطفى الشناوي','الفرقة الرابعة','قسم الكيمياء','الكيمياء والأدلة الجنائية','شريط كاشف سريع للكشف عن غش زيوت الطعام، يعطي نتيجة لونية خلال دقيقتين بدون أجهزة معملية.',4],
+    ['idea','محمود عاطف زكي','الفرقة الأولى','قسم الرياضيات','رياضيات وإحصاء وعلوم حاسب','تطبيق لجدولة محاضرات الكلية يحل تعارض القاعات والمعامل تلقائيًا باستخدام خوارزميات التلوين في نظرية البيان.',5],
+    ['idea','آية جمال الدين','الفرقة الثالثة','قسم علم الحيوان','التحاليل التطبيقية في العلوم البيولوجية','معمل تحاليل متنقل لخدمة القرى المحيطة بالمنصورة، يديره طلاب تحت إشراف أعضاء هيئة التدريس كتدريب عملي وخدمة مجتمعية.',6],
+    ['idea','كريم وليد عبد الحميد','الفرقة الرابعة','قسم جيولوجيا','الجوفيزياء','استخدام المسح الجوفيزيائي الضحل لتحديد مواقع المياه الجوفية في المناطق الصحراوية القريبة، وإعداد خريطة استرشادية للمزارعين.',7],
+    ['idea','هاجر سمير القاضي','الفرقة الثانية','قسم علم النبات','ميكروبيولوجي','إنتاج أكياس قابلة للتحلل من نشا الذرة ومخلفات الموز كبديل للأكياس البلاستيكية داخل كافيتريات الجامعة.',8],
+    ['idea','عمر شريف الدسوقي','الفرقة الثالثة','قسم الفيزياء','الفيزياء','خلايا شمسية مطبوعة مرنة منخفضة التكلفة لتشغيل أعمدة الإنارة داخل الحرم الجامعي، مع قياس الكفاءة في ظروف الطقس المحلي.',9],
+
+    ['question','فاطمة الزهراء أحمد','الفرقة الأولى','قسم الكيمياء','الكيمياء','هل يمكن تغيير البرنامج النوعي بعد بداية الفصل الدراسي الأول؟ وما هي المواعيد النهائية لتقديم طلب التغيير؟',1],
+    ['question','مصطفى كامل عبد العزيز','الفرقة الثانية','قسم الفيزياء','الكيمياء والفيزياء','جدول المعامل متعارض مع محاضرة الرياضيات يوم الأحد، هل يوجد مجموعة بديلة يمكن التحويل إليها؟',1],
+    ['question','رنا هشام البديوي','الفرقة الثالثة','قسم الرياضيات','رياضيات وإحصاء وعلوم حاسب','ما هي شروط التقديم للتدريب الصيفي؟ وهل التدريب خارج المحافظة معتمد من الكلية؟',2],
+    ['question','عبد الرحمن ماهر سعد','الفرقة الرابعة','قسم جيولوجيا','الجيولوجيا','متى موعد الرحلة العلمية الميدانية هذا العام؟ وهل هناك رسوم إضافية مطلوبة؟',3],
+    ['question','شيماء عبد الله منصور','الفرقة الثانية','قسم علم الحيوان','علم الحيوان','أحتاج شهادة قيد لتقديمها في التأمين الصحي، ما هي الأوراق المطلوبة ومدة الاستخراج؟',4],
+    ['question','زياد فتحي العوضي','الفرقة الأولى','قسم علم النبات','كيمياء ونبات','ما هو آخر موعد للحذف والإضافة؟ وهل يؤثر الحذف بعد الأسبوع الرابع على التقدير؟',5],
+    ['question','ندى أشرف الجندي','الفرقة الثالثة','قسم الكيمياء','كيمياء حيوي','كيف يتم اختيار المواد الاختيارية؟ وهل يمكن تسجيل مادة من قسم آخر ضمن الساعات الاختيارية؟',6],
+    ['question','إسلام رضا الشربيني','الفرقة الرابعة','قسم الفيزياء','برنامج الفيزياء الطبية','ما هي خطوات التقديم لمشروع التخرج؟ ومتى يتم إعلان توزيع المشرفين على الطلاب؟',7],
+    ['question','مريم صلاح الطنطاوي','الفرقة الثانية','قسم جيولوجيا','جيولوجيا البترول والتعدين','قمت بأداء امتحان المعادلة، متى تظهر النتيجة؟ وهل تحتسب ضمن المعدل التراكمي؟',8],
+    ['question','طارق منير عبد الستار','الفرقة الثالثة','قسم علم الحيوان','كيمياء وحيوان','كيف أشترك في الأنشطة الطلابية والأسر العلمية؟ وهل هناك شروط لمعدل الدرجات للاشتراك؟',9]
+  ];
+
+  // أرقام/بريد تجريبي يتولّد من غير لمس بيانات الاسم والفكرة
+  var DEMO_PREFIXES = ['010','011','012','015'];
+  function demoEmail(i){ return 'student' + (i + 1) + '.fos@example.com'; }
+  function demoPhone(i){ return DEMO_PREFIXES[i % 4] + String(10000000 + i * 137529).slice(0,8); }
+
+  function seedDemoIfEmpty(){
+    if (SERVER_URL) return;              // الخادم فيه بيانات حقيقية — منزرعش
+    if (Store._readLocal().length) return;
+    var ay = academicYear();
+    var items = DEMO.map(function(r, i){
+      var d = new Date();
+      d.setDate(d.getDate() - r[6]);
+      d.setHours(9 + (i % 9), (i * 7) % 60, 0, 0);
+      return {
+        id: 'demo_' + i,
+        type: r[0], name: r[1], email: demoEmail(i), phone: demoPhone(i),
+        year: r[2], dept: r[3], program: r[4], text: r[5],
+        image: null, academicYear: ay, createdAt: d.toISOString(), demo: true
+      };
+    });
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch(e){}
+  }
+
+  var ICONS = {
+    idea: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.4 10.9c.6.4.9 1 .9 1.7V16h5v-.4c0-.7.3-1.3.9-1.7A6 6 0 0012 3z"/><path d="M12 1v1.2M4.2 4.2l.9.9M1 12h1.2M19.8 5.1l.9-.9M22 12h-1.2"/></svg>',
+    family: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3.5 20c.5-3.2 2.8-5 5.5-5s5 1.8 5.5 5"/><path d="M15 15.2c2 .2 3.6 1.7 4 4.3"/></svg>',
+    question: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.6 8.6 0 01-8.9 8.6c-1.4 0-2.7-.3-3.8-.9L3 21l1.4-4.1A8.4 8.4 0 013.4 12 8.6 8.6 0 0112 3.4 8.6 8.6 0 0121 12z"/><path d="M9.6 9.5a2.4 2.4 0 014.6.8c0 1.6-2.2 1.9-2.2 3.3"/><circle cx="12" cy="16.6" r=".2" fill="currentColor"/></svg>',
+    edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 12h5M9 16h3"/><circle cx="18" cy="6" r="3.1"/><path d="M16.7 6h2.6M18 4.7v2.6"/></svg>',
+    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M21 21l-4.3-4.3"/><path d="M8 11l1.6-2.6L11 10l2-3"/></svg>',
+    cert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="5.5"/><path d="M9.5 13 8 21l4-2 4 2-1.5-8"/></svg>',
+    scale: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v15M7 21h10"/><path d="M4 7h6M14 7h6"/><path d="M4 7l-2.5 5a2.8 2.8 0 005 0L4 7zM20 7l-2.5 5a2.8 2.8 0 005 0L20 7z"/></svg>',
+    monitor: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><path d="M8.5 10l2 2 4.5-4.5"/></svg>'
+  };
+
+  var SOON_LABEL = {
+    family:"المشاركة في الأسر الطلابية", question:"أسئلة واستفسارات للطلاب", edit:"طلبات الحذف والإضافة",
+    search:"البحث الاجتماعي", cert:"الشهادات", scale:"التظلمات", monitor:"التصحيح الإلكتروني"
+  };
+
+  var MODULES = {
+    idea: {
+      title: "أفكار إبداعية وريادة أعمال",
+      subtitle: "شارك فكرتك، وخلّيها أول خطوة في مشروعك القادم",
+      cardTitle: "بيانات الفكرة",
+      fieldLabel: "فكرتك الإبداعية",
+      fieldPlaceholder: "احكيلنا عن فكرتك: إيه المشكلة اللي بتحلها، وإزاي هتنفذها...",
+      fieldError: "من فضلك اكتب تفاصيل فكرتك",
+      bodyLabel: "الفكرة",
+      submitLabel: "إرسال الفكرة ←",
+      successTitle: "فكرتك جاهزة للإرسال",
+      infoTitle: "قبل ما تبعت فكرتك",
+      mailSubject: "فكرة إبداعية جديدة",
+      fileLabel: "فكرة",
+      hasImage: true,
+      info: [
+        "الاسم والبريد الإلكتروني ورقم الهاتف والفرقة والقسم والفكرة إلزاميين.",
+        "البرنامج النوعي بيظهر لك بعد ما تختار القسم.",
+        "الصورة اختيارية — ابعتها لو هتوضح فكرتك أكتر.",
+        "هيتم تجهيز رسالة جاهزة تبعتها لإدارة شؤون الطلاب بضغطة واحدة."
+      ]
+    },
+    question: {
+      title: "أسئلة واستفسارات للطلاب",
+      subtitle: "اكتب سؤالك أو استفسارك في أي وقت، وهيوصل لإدارة شؤون الطلاب",
+      cardTitle: "بيانات الاستفسار",
+      fieldLabel: "أسئلتك واستفساراتك",
+      fieldPlaceholder: "اكتب هنا كل أسئلتك واستفساراتك بالتفصيل...",
+      fieldError: "من فضلك اكتب سؤالك أو استفسارك",
+      bodyLabel: "الأسئلة والاستفسارات",
+      submitLabel: "إرسال الاستفسار ←",
+      successTitle: "استفسارك جاهز للإرسال",
+      infoTitle: "قبل ما تبعت استفسارك",
+      mailSubject: "سؤال/استفسار جديد",
+      fileLabel: "استفسار",
+      hasImage: true,
+      info: [
+        "الاسم والبريد الإلكتروني ورقم الهاتف والفرقة والقسم والاستفسار إلزاميين.",
+        "البرنامج النوعي بيظهر لك بعد ما تختار القسم.",
+        "تقدر تكتب أكتر من سؤال في نفس الرسالة.",
+        "ترفق صورة لو محتاج توضيح (اختياري)."
+      ]
+    }
+  };
+
+  var TILES = [
+    {key:"idea", label:"أفكار إبداعية وريادة أعمال", icon:"idea", live:true},
+    {key:"family", label:"المشاركة في الأسر الطلابية", icon:"family"},
+    {key:"question", label:"أسئلة واستفسارات للطلاب", icon:"question", live:true},
+    {key:"edit", label:"طلبات الحذف والإضافة", icon:"edit"},
+    {key:"search", label:"البحث الاجتماعي", icon:"search"},
+    {key:"cert", label:"الشهادات", icon:"cert"},
+    {key:"scale", label:"التظلمات", icon:"scale"},
+    {key:"monitor", label:"التصحيح الإلكتروني", icon:"monitor"}
+  ];
+
+  var hubGrid = document.getElementById('hubGrid');
+  TILES.forEach(function(t){
+    var el = document.createElement('button');
+    el.className = 'tile';
+    el.type = 'button';
+    el.innerHTML =
+      '<span class="badge ' + (t.live ? 'live' : '') + '">' + (t.live ? 'متاح الآن' : 'قريبًا') + '</span>' +
+      '<span class="icon-badge">' + ICONS[t.icon] + '</span>' +
+      '<span class="tile-label">' + t.label + '</span>';
+    el.addEventListener('click', function(){
+      var proceed = function(){
+        if (MODULES[t.key]) { openModule(t.key); }
+        else { openSoon(t); }
+      };
+      var motion = document.body.getAttribute('data-motion');
+      if (motion === 'bounce' || motion === 'flip3d' || motion === 'neon'){
+        el.classList.add('tile-pop');
+        setTimeout(function(){ el.classList.remove('tile-pop'); proceed(); }, 320);
+      } else {
+        proceed();
+      }
+    });
+    hubGrid.appendChild(el);
+  });
+
+  function openSoon(t){
+    document.getElementById('soonIcon').innerHTML = ICONS[t.icon];
+    document.getElementById('soonTitle').textContent = SOON_LABEL[t.key] || t.label;
+    document.getElementById('soonOverlay').classList.add('open');
+  }
+  document.getElementById('soonClose').addEventListener('click', function(){
+    document.getElementById('soonOverlay').classList.remove('open');
+  });
+  document.getElementById('soonOverlay').addEventListener('click', function(e){
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  var currentModule = MODULES.idea;
+
+  function showScreen(name){
+    document.getElementById('screen-hub').style.display = name === 'hub' ? 'block' : 'none';
+    document.getElementById('screen-form').style.display = name === 'form' ? 'block' : 'none';
+    document.getElementById('screen-admin').style.display = name === 'admin' ? 'block' : 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function openModule(key){
+    var m = MODULES[key];
+    currentModule = m;
+
+    document.getElementById('moduleTitle').textContent = m.title;
+    document.getElementById('moduleSubtitle').textContent = m.subtitle;
+    document.getElementById('formCardTitle').textContent = m.cardTitle;
+    document.getElementById('mainFieldLabel').innerHTML =
+      escapeHtml(m.fieldLabel) + ' <span class="req">*</span>';
+    document.getElementById('ideaText').placeholder = m.fieldPlaceholder;
+    document.getElementById('err-idea').textContent = m.fieldError;
+    document.getElementById('submitBtn').textContent = m.submitLabel;
+    document.getElementById('successTitle').textContent = m.successTitle;
+    document.getElementById('infoTitle').textContent = m.infoTitle;
+    document.getElementById('imageField').style.display = m.hasImage ? 'block' : 'none';
+
+    var infoList = document.getElementById('infoList');
+    infoList.innerHTML = '';
+    m.info.forEach(function(line){
+      var li = document.createElement('li');
+      var dot = document.createElement('span');
+      dot.className = 'dot';
+      li.appendChild(dot);
+      li.appendChild(document.createTextNode(line));
+      infoList.appendChild(li);
+    });
+
+    resetForm();
+    showScreen('form');
+  }
+
+  document.getElementById('backBtn').addEventListener('click', function(){ showScreen('hub'); });
+
+  /* ---- motion switcher ---- */
+  document.querySelectorAll('.motion-pill').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.motion-pill').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.body.setAttribute('data-motion', btn.getAttribute('data-motion'));
+      // replay entrance animations
+      document.body.classList.add('replay');
+      void document.body.offsetWidth;
+      document.body.classList.remove('replay');
+    });
+  });
+  document.getElementById('hideMotionBar').addEventListener('click', function(){
+    document.getElementById('motionBar').classList.add('hidden');
+  });
+  document.body.setAttribute('data-motion','elegant');
+
+  /* ---- academic year ---- */
+  function academicYear(){
+    var d = new Date(), y = d.getFullYear(), m = d.getMonth()+1;
+    return m >= 9 ? (y + '/' + (y+1)) : ((y-1) + '/' + y);
+  }
+  document.getElementById('yearChip').textContent = 'العام الدراسي ' + academicYear();
+  seedDemoIfEmpty();
+
+  /* ---- departments & programs ---- */
+  var PROGRAMS = {
+    "قسم الكيمياء": ["الكيمياء الحيوية التطبيقية والبيولوجية الجزئية","البتروكيماويات وتطبيقاتها","الكيمياء والأدلة الجنائية","كيمياء حيوي","الكيمياء"],
+    "قسم الفيزياء": ["برنامج الفيزياء الطبية","الفيزياء","الكيمياء والفيزياء"],
+    "قسم الرياضيات": ["رياضيات وإحصاء وعلوم حاسب"],
+    "قسم جيولوجيا": ["جيولوجيا البترول والتعدين","الجيولوجيا","الجوفيزياء"],
+    "قسم علم الحيوان": ["كيمياء وحيوان","علم الحيوان","التحاليل التطبيقية في العلوم البيولوجية"],
+    "قسم علم النبات": ["كيمياء ونبات","ميكروبيولوجي","التكنولوجيا الحيوية وتطبيقاتها"]
+  };
+  var deptSelect = document.getElementById('studentDept');
+  Object.keys(PROGRAMS).forEach(function(d){
+    var o = document.createElement('option'); o.textContent = d; deptSelect.appendChild(o);
+  });
+  var progSelect = document.getElementById('studentProgram');
+  var programHint = document.getElementById('programHint');
+  deptSelect.addEventListener('change', function(){
+    var list = PROGRAMS[deptSelect.value];
+    progSelect.innerHTML = '';
+    if (list && list.length){
+      progSelect.disabled = false;
+      programHint.textContent = '(اختياري)';
+      var ph = document.createElement('option'); ph.value=''; ph.textContent='اختر البرنامج النوعي'; progSelect.appendChild(ph);
+      list.forEach(function(p){ var o=document.createElement('option'); o.textContent=p; progSelect.appendChild(o); });
+    } else {
+      progSelect.disabled = true;
+      programHint.textContent = '(اختر القسم أولًا)';
+      var o2 = document.createElement('option'); o2.value=''; o2.textContent='—'; progSelect.appendChild(o2);
+    }
+  });
+
+  /* ---- idea textarea counter ---- */
+  var ideaText = document.getElementById('ideaText');
+  var charCount = document.getElementById('charCount');
+  ideaText.addEventListener('input', function(){ charCount.textContent = ideaText.value.length; });
+
+  /* ---- image upload ---- */
+  var dropzone = document.getElementById('dropzone');
+  var imageInput = document.getElementById('imageInput');
+  var previewWrap = document.getElementById('previewWrap');
+  var previewImg = document.getElementById('previewImg');
+  var previewName = document.getElementById('previewName');
+  var selectedImage = null;
+
+  dropzone.addEventListener('click', function(){ imageInput.click(); });
+  dropzone.addEventListener('dragover', function(e){ e.preventDefault(); dropzone.style.borderColor = 'var(--primary-2)'; });
+  dropzone.addEventListener('dragleave', function(){ dropzone.style.borderColor = ''; });
+  dropzone.addEventListener('drop', function(e){
+    e.preventDefault(); dropzone.style.borderColor = '';
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) handleImage(e.dataTransfer.files[0]);
+  });
+  imageInput.addEventListener('change', function(){
+    if (imageInput.files && imageInput.files[0]) handleImage(imageInput.files[0]);
+  });
+  function handleImage(file){
+    if (!file.type.startsWith('image/')) return;
+    selectedImage = file;
+    previewImg.src = URL.createObjectURL(file);
+    previewName.textContent = file.name;
+    previewWrap.style.display = 'flex';
+    dropzone.style.display = 'none';
+  }
+  document.getElementById('removeImage').addEventListener('click', function(){
+    selectedImage = null;
+    imageInput.value = '';
+    previewWrap.style.display = 'none';
+    dropzone.style.display = 'block';
+  });
+
+  /* ---- form submit ---- */
+  var form = document.getElementById('ideaForm');
+  var DEST_EMAIL = 'mariamwork65@gmail.com';
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('studentName').value.trim();
+    var idea = ideaText.value.trim();
+    var year = document.getElementById('studentYear').value;
+    var dept = deptSelect.value;
+    var program = progSelect.value;
+    var email = document.getElementById('studentEmail').value.trim();
+    var phone = document.getElementById('studentPhone').value.trim();
+    var emailOk = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    var ok = true;
+    document.getElementById('err-name').classList.toggle('show', !name); if (!name) ok = false;
+    document.getElementById('err-email').classList.toggle('show', !emailOk); if (!emailOk) ok = false;
+    document.getElementById('err-phone').classList.toggle('show', !phone); if (!phone) ok = false;
+    document.getElementById('err-year').classList.toggle('show', !year); if (!year) ok = false;
+    document.getElementById('err-dept').classList.toggle('show', !dept); if (!dept) ok = false;
+    document.getElementById('err-idea').classList.toggle('show', idea.length < 5); if (idea.length < 5) ok = false;
+    if (!ok){
+      var firstErr = document.querySelector('#form-card .error-msg.show');
+      if (firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    var ay = academicYear();
+    var now = new Date();
+    var dateStr = now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+
+    var hasImage = currentModule.hasImage && selectedImage;
+
+    var rows = [
+      ['البريد الإلكتروني', email || 'غير محدد'],
+      ['رقم الهاتف', phone || 'غير محدد'],
+      ['الفرقة', year || 'غير محدد'],
+      ['القسم', dept || 'غير محدد'],
+      ['البرنامج النوعي', (dept && program) ? program : 'غير محدد'],
+      ['العام الدراسي', ay],
+      ['تاريخ الإرسال', dateStr]
+    ];
+    if (currentModule.hasImage){
+      rows.push(['صورة مرفقة', hasImage ? 'نعم (' + selectedImage.name + ')' : 'لا']);
+    }
+
+    var reviewCard = document.getElementById('reviewCard');
+    reviewCard.innerHTML = rows.map(function(r){
+      return '<div class="review-row"><span class="k">' + r[0] + '</span><span class="v">' + r[1] + '</span></div>';
+    }).join('') + '<div class="review-idea">' + escapeHtml(idea).replace(/\n/g,'<br>') + '</div>';
+
+    document.getElementById('reviewName').textContent = name;
+
+    var bodyLines = [
+      'اسم الطالب: ' + name,
+      'البريد الإلكتروني: ' + (email || 'غير محدد'),
+      'رقم الهاتف: ' + (phone || 'غير محدد'),
+      'الفرقة: ' + (year || 'غير محدد'),
+      'القسم: ' + (dept || 'غير محدد'),
+      'البرنامج النوعي: ' + ((dept && program) ? program : 'غير محدد'),
+      'العام الدراسي: ' + ay,
+      'تاريخ الإرسال: ' + dateStr,
+      '',
+      currentModule.bodyLabel + ':',
+      idea
+    ];
+    if (currentModule.hasImage){
+      bodyLines.push('');
+      bodyLines.push(hasImage
+        ? 'ملحوظة: الطالب أرفق صورة توضيحية باسم "' + selectedImage.name + '" — برجاء طلبها منه أو إرفاقها يدويًا إن تم تنزيلها.'
+        : 'لا توجد صورة مرفقة.');
+    }
+    var plainSummary = bodyLines.join('\n');
+
+    var subject = encodeURIComponent(currentModule.mailSubject + ' - ' + name);
+    var mailHref = 'mailto:' + DEST_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(plainSummary);
+    document.getElementById('mailBtn').href = mailHref;
+
+    document.getElementById('downloadImgBtn').style.display = hasImage ? 'inline-flex' : 'none';
+
+    document.getElementById('copyBtn').onclick = function(){
+      copyText(plainSummary);
+    };
+    document.getElementById('downloadTxtBtn').onclick = function(){
+      saveText(currentModule.fileLabel + '-' + name + '.txt', plainSummary);
+    };
+    document.getElementById('downloadImgBtn').onclick = function(){
+      saveImage(selectedImage);
+    };
+    document.getElementById('newIdeaBtn').textContent = currentModule.hasImage ? 'إرسال فكرة تانية' : 'إرسال استفسار تاني';
+    document.getElementById('newIdeaBtn').onclick = resetForm;
+
+    document.getElementById('form-card').style.display = 'none';
+    document.getElementById('success-panel').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+
+    // حفظ الطلب لعرضه في لوحة المشرف
+    var savedNote = document.getElementById('savedNote');
+    savedNote.style.display = 'flex';
+    savedNote.style.color = 'var(--ink-soft)';
+    savedNote.textContent = '⏳ جارٍ حفظ الطلب...';
+
+    var imgPromise = hasImage ? compressImage(selectedImage) : Promise.resolve(null);
+    imgPromise.then(function(imgData){
+      return Store.add({
+        id: 'sub_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        type: currentModule === MODULES.question ? 'question' : 'idea',
+        name: name,
+        email: email || '',
+        phone: phone || '',
+        year: year || '',
+        dept: dept || '',
+        program: (dept && program) ? program : '',
+        text: idea,
+        image: imgData,
+        academicYear: ay,
+        createdAt: new Date().toISOString()
+      });
+    }).then(function(){
+      savedNote.style.color = 'var(--success)';
+      savedNote.textContent = '✅ تم حفظ طلبك ووصل للوحة المشرف';
+    }).catch(function(){
+      savedNote.style.color = '#C0392B';
+      savedNote.textContent = '⚠️ تعذر حفظ الطلب — من فضلك استخدم زر النسخ أو التنزيل بالأسفل';
+    });
+  });
+
+  // تصغير الصورة قبل الحفظ عشان متتقلش على الموقع
+  function compressImage(file){
+    return new Promise(function(resolve){
+      var reader = new FileReader();
+      reader.onload = function(){
+        var img = new Image();
+        img.onload = function(){
+          var max = 1000;
+          var w = img.width, h = img.height;
+          if (w > max || h > max){
+            if (w >= h){ h = Math.round(h * max / w); w = max; }
+            else { w = Math.round(w * max / h); h = max; }
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          try { resolve(canvas.toDataURL('image/jpeg', 0.65)); }
+          catch(e){ resolve(null); }
+        };
+        img.onerror = function(){ resolve(null); };
+        img.src = reader.result;
+      };
+      reader.onerror = function(){ resolve(null); };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ================= ADMIN DASHBOARD ================= */
+
+  var adminData = [];
+  var adminFilter = 'all';
+
+  function openAdmin(){
+    showScreen('admin');
+    if (sessionStorage.getItem('fos-admin-unlocked') === '1'){ unlockAdmin(); }
+  }
+
+  // الدخول للوحة المشرف: رابط ينتهي بـ #admin ، أو Ctrl+Shift+A
+  if (location.hash === '#admin') { openAdmin(); }
+  window.addEventListener('hashchange', function(){
+    if (location.hash === '#admin') openAdmin();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')){
+      e.preventDefault();
+      openAdmin();
+    }
+  });
+
+  document.getElementById('adminBackBtn').addEventListener('click', function(){
+    if (location.hash === '#admin'){ history.replaceState(null, '', location.pathname + location.search); }
+    showScreen('hub');
+  });
+
+  document.getElementById('adminLogin').addEventListener('click', tryLogin);
+  document.getElementById('adminPass').addEventListener('keydown', function(e){
+    if (e.key === 'Enter') tryLogin();
+  });
+
+  function tryLogin(){
+    var val = document.getElementById('adminPass').value.trim();
+    if (val === ADMIN_PASSWORD){
+      try { sessionStorage.setItem('fos-admin-unlocked', '1'); } catch(e){}
+      document.getElementById('err-pass').classList.remove('show');
+      document.getElementById('adminPass').value = '';
+      unlockAdmin();
+    } else {
+      document.getElementById('err-pass').classList.add('show');
+    }
+  }
+
+  function unlockAdmin(){
+    document.getElementById('adminGate').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    renderModeBanner();
+    loadSubmissions();
+  }
+
+  function renderModeBanner(){
+    var el = document.getElementById('modeBanner');
+    if (Store.mode() === 'remote'){
+      el.className = 'mode-banner remote';
+      el.innerHTML = '<span>🟢</span><span><b>متصل بالخادم</b>الطلبات بتوصل هنا من كل أجهزة الطلاب تلقائيًا.</span>';
+    } else {
+      el.className = 'mode-banner local';
+      el.innerHTML = '<span>⚠️</span><span><b>وضع التجربة — الطلبات محفوظة على هذا الجهاز فقط</b>' +
+        'عشان تستقبلي طلبات الطلاب من موبايلاتهم، لازم تربطي الموقع بالخادم المجاني (خطوات بسيطة في ملف التعليمات).</span>';
+    }
+  }
+
+  function loadSubmissions(){
+    var list = document.getElementById('subList');
+    list.innerHTML = '<div class="empty-state">جارٍ التحميل...</div>';
+    Store.list().then(function(items){
+      adminData = (items || []).slice().sort(function(a, b){
+        return String(b.createdAt).localeCompare(String(a.createdAt));
+      });
+      renderStats();
+      renderList();
+    }).catch(function(){
+      list.innerHTML = '<div class="empty-state"><div class="big">⚠️</div>تعذر تحميل الطلبات — راجعي رابط الخادم</div>';
+    });
+  }
+
+  function renderStats(){
+    document.getElementById('statAll').textContent = adminData.length;
+    document.getElementById('statIdea').textContent = adminData.filter(function(x){ return x.type === 'idea'; }).length;
+    document.getElementById('statQuestion').textContent = adminData.filter(function(x){ return x.type === 'question'; }).length;
+  }
+
+  function renderList(){
+    var q = document.getElementById('adminSearch').value.trim().toLowerCase();
+    var list = document.getElementById('subList');
+    var rows = adminData.filter(function(x){
+      if (adminFilter !== 'all' && x.type !== adminFilter) return false;
+      if (!q) return true;
+      return [x.name, x.dept, x.program, x.year, x.text].join(' ').toLowerCase().indexOf(q) !== -1;
+    });
+
+    if (!rows.length){
+      list.innerHTML = '<div class="empty-state"><div class="big">📭</div>' +
+        (adminData.length ? 'مفيش نتائج مطابقة للبحث' : 'لسه مفيش طلبات مرسلة') + '</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    rows.forEach(function(x){
+      var card = document.createElement('div');
+      card.className = 'sub-card';
+
+      var typeLabel = x.type === 'question' ? 'استفسار' : 'فكرة إبداعية';
+      var d = new Date(x.createdAt);
+      var dateStr = isNaN(d) ? '' : d.toLocaleDateString('ar-EG') + ' · ' +
+        d.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+
+      var head = document.createElement('div');
+      head.className = 'sub-head';
+      var nameEl = document.createElement('span');
+      nameEl.className = 'sub-name';
+      nameEl.textContent = x.name;
+      var chip = document.createElement('span');
+      chip.className = 'type-chip ' + (x.type === 'question' ? 'question' : 'idea');
+      chip.textContent = typeLabel;
+      var dateEl = document.createElement('span');
+      dateEl.className = 'sub-date';
+      dateEl.textContent = dateStr;
+      head.appendChild(nameEl); head.appendChild(chip);
+      if (x.demo){
+        var dc = document.createElement('span');
+        dc.className = 'demo-chip';
+        dc.textContent = 'تجريبي';
+        head.appendChild(dc);
+      }
+      head.appendChild(dateEl);
+
+      var meta = document.createElement('div');
+      meta.className = 'sub-meta';
+      [['البريد', x.email], ['الهاتف', x.phone], ['الفرقة', x.year], ['القسم', x.dept], ['البرنامج', x.program], ['العام الدراسي', x.academicYear]]
+        .forEach(function(pair){
+          if (!pair[1]) return;
+          var s = document.createElement('span');
+          var b = document.createElement('b');
+          b.textContent = pair[0] + ': ';
+          s.appendChild(b);
+          s.appendChild(document.createTextNode(pair[1]));
+          meta.appendChild(s);
+        });
+
+      var body = document.createElement('div');
+      body.className = 'sub-body';
+      body.textContent = x.text;
+
+      card.appendChild(head);
+      if (meta.children.length) card.appendChild(meta);
+      card.appendChild(body);
+
+      if (x.image){
+        var wrap = document.createElement('div');
+        wrap.className = 'sub-img';
+        var im = document.createElement('img');
+        im.src = x.image;
+        im.alt = 'صورة مرفقة';
+        im.addEventListener('click', function(){
+          document.getElementById('lightboxImg').src = x.image;
+          document.getElementById('lightbox').classList.add('open');
+        });
+        wrap.appendChild(im);
+        card.appendChild(wrap);
+      }
+
+      var actions = document.createElement('div');
+      actions.className = 'sub-actions';
+
+      var copyB = document.createElement('button');
+      copyB.className = 'mini-btn';
+      copyB.textContent = '📋 نسخ';
+      copyB.addEventListener('click', function(){ copyText(formatOne(x)); });
+
+      var replyB = document.createElement('button');
+      replyB.className = 'mini-btn reply-btn';
+      replyB.textContent = x.type === 'question' ? '📧 الرد على الاستفسار' : '📧 السؤال عن الفكرة';
+      if (!x.email){
+        replyB.disabled = true;
+        replyB.title = 'الطالب لم يُدخل بريدًا إلكترونيًا';
+      }
+      replyB.addEventListener('click', function(){ openReplyModal(x); });
+
+      var delB = document.createElement('button');
+      delB.className = 'mini-btn danger';
+      delB.textContent = '🗑 حذف';
+      delB.addEventListener('click', function(){
+        if (!confirm('متأكد إنك عايز تحذف طلب "' + x.name + '"؟')) return;
+        Store.remove(x.id).then(function(){
+          showToast('تم الحذف');
+          loadSubmissions();
+        }).catch(function(){ showToast('تعذر الحذف'); });
+      });
+
+      actions.appendChild(copyB);
+      actions.appendChild(replyB);
+      actions.appendChild(delB);
+      card.appendChild(actions);
+
+      list.appendChild(card);
+    });
+  }
+
+  function formatOne(x){
+    var d = new Date(x.createdAt);
+    return [
+      (x.type === 'question' ? 'استفسار' : 'فكرة إبداعية'),
+      'اسم الطالب: ' + x.name,
+      'البريد الإلكتروني: ' + (x.email || 'غير محدد'),
+      'رقم الهاتف: ' + (x.phone || 'غير محدد'),
+      'الفرقة: ' + (x.year || 'غير محدد'),
+      'القسم: ' + (x.dept || 'غير محدد'),
+      'البرنامج النوعي: ' + (x.program || 'غير محدد'),
+      'العام الدراسي: ' + (x.academicYear || ''),
+      'التاريخ: ' + (isNaN(d) ? '' : d.toLocaleString('ar-EG')),
+      '',
+      (x.type === 'question' ? 'الأسئلة والاستفسارات:' : 'الفكرة:'),
+      x.text
+    ].join('\n');
+  }
+
+  document.querySelectorAll('.filter-pill').forEach(function(p){
+    p.addEventListener('click', function(){
+      document.querySelectorAll('.filter-pill').forEach(function(o){ o.classList.remove('active'); });
+      p.classList.add('active');
+      adminFilter = p.getAttribute('data-filter');
+      renderList();
+    });
+  });
+  document.getElementById('adminSearch').addEventListener('input', renderList);
+  document.getElementById('refreshBtn').addEventListener('click', loadSubmissions);
+  document.getElementById('exportBtn').addEventListener('click', function(){
+    if (!adminData.length){ showToast('مفيش طلبات للتصدير'); return; }
+    var text = adminData.map(formatOne).join('\n\n' + '='.repeat(50) + '\n\n');
+    saveText('طلبات-شؤون-الطلاب.txt', text);
+  });
+  document.getElementById('lightbox').addEventListener('click', function(){
+    this.classList.remove('open');
+  });
+
+  /* ---------- الرد على الطالب بالإيميل ---------- */
+
+  var replyTarget = null;
+
+  function openReplyModal(x){
+    replyTarget = x;
+    document.getElementById('replyTo').innerHTML =
+      'هيتبعت لـ <b>' + escapeHtml(x.name) + '</b> — ' + escapeHtml(x.email);
+    document.getElementById('replySubject').value =
+      x.type === 'question' ? ('رد على استفسارك - شؤون الطلاب') : ('بخصوص فكرتك: ' + x.name);
+    document.getElementById('replyMessage').value =
+      x.type === 'question'
+        ? ('مرحبًا ' + x.name + '،\n\nبخصوص استفسارك:\n«' + x.text.slice(0, 160) + (x.text.length > 160 ? '…' : '') + '»\n\n')
+        : ('مرحبًا ' + x.name + '،\n\nشكرًا لمشاركتك فكرتك الإبداعية معنا. ');
+    document.getElementById('replyNote').textContent = '';
+    document.getElementById('replyNote').className = 'reply-note';
+
+    var sendBtn = document.getElementById('replySendBtn');
+    if (!SERVER_URL){
+      sendBtn.disabled = true;
+      document.getElementById('replyNote').textContent =
+        '⚠️ الإرسال الفعلي محتاج ربط الخادم المجاني أولًا (خطوات بسيطة في ملف التعليمات) — لحد ما يتم الربط تقدري تكتبي الرد وتنسخيه فقط.';
+      document.getElementById('replyNote').className = 'reply-note err';
+    } else {
+      sendBtn.disabled = false;
+    }
+
+    document.getElementById('replyOverlay').classList.add('open');
+  }
+
+  document.getElementById('replyCancelBtn').addEventListener('click', function(){
+    document.getElementById('replyOverlay').classList.remove('open');
+  });
+  document.getElementById('replyOverlay').addEventListener('click', function(e){
+    if (e.target === this) this.classList.remove('open');
+  });
+
+  document.getElementById('replySendBtn').addEventListener('click', function(){
+    if (!replyTarget) return;
+    var subject = document.getElementById('replySubject').value.trim();
+    var message = document.getElementById('replyMessage').value.trim();
+    var note = document.getElementById('replyNote');
+
+    if (!subject || !message){
+      note.textContent = 'من فضلك اكتبي الموضوع ونص الرد.';
+      note.className = 'reply-note err';
+      return;
+    }
+
+    var btn = this;
+    btn.disabled = true;
+    note.className = 'reply-note';
+    note.textContent = '⏳ جارٍ الإرسال...';
+
+    Store.sendEmail({
+      to: replyTarget.email,
+      studentName: replyTarget.name,
+      subject: subject,
+      message: message,
+      type: replyTarget.type
+    }).then(function(){
+      note.textContent = '';
+      document.getElementById('replyOverlay').classList.remove('open');
+      showToast('✅ تم إرسال الرد لـ ' + replyTarget.name);
+    }).catch(function(err){
+      btn.disabled = false;
+      if (err && err.code === 'no_server'){
+        note.textContent = '⚠️ الإرسال محتاج ربط الخادم أولًا.';
+      } else {
+        note.textContent = '⚠️ تعذر الإرسال — تأكدي من اتصال الإنترنت وحاولي تاني.';
+      }
+      note.className = 'reply-note err';
+    });
+  });
+
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+
+  document.getElementById('exportExcelBtn').addEventListener('click', function(){
+    if (!adminData.length){ showToast('مفيش طلبات للتصدير'); return; }
+    var head = ['النوع','اسم الطالب','البريد الإلكتروني','رقم الهاتف','الفرقة','القسم','البرنامج النوعي','النص','العام الدراسي','التاريخ'];
+    var rows = adminData.map(function(x){
+      var d = new Date(x.createdAt);
+      return [
+        x.type === 'question' ? 'استفسار' : 'فكرة إبداعية',
+        x.name, x.email, x.phone, x.year, x.dept, x.program, x.text, x.academicYear,
+        isNaN(d) ? '' : d.toLocaleString('ar-EG')
+      ];
+    });
+    var csv = [head].concat(rows).map(function(r){
+      return r.map(function(c){ return '"' + String(c == null ? '' : c).replace(/"/g,'""') + '"'; }).join(',');
+    }).join('\r\n');
+    saveText('طلبات-شؤون-الطلاب.csv', '﻿' + 'sep=,\r\n' + csv);
+  });
+
+  document.getElementById('clearDemoBtn').addEventListener('click', function(){
+    var demos = adminData.filter(function(x){ return x.demo; });
+    if (!demos.length){ showToast('مفيش بيانات تجريبية'); return; }
+    if (!confirm('هيتم مسح ' + demos.length + ' طلب تجريبي. الطلبات الحقيقية مش هتتأثر. تمام؟')) return;
+    Promise.all(demos.map(function(x){ return Store.remove(x.id); })).then(function(){
+      showToast('تم مسح البيانات التجريبية');
+      loadSubmissions();
+    });
+  });
+
+  /* ================= تقرير إحصائيات الجودة ================= */
+
+  document.querySelectorAll('.view-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.view-tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var v = tab.getAttribute('data-view');
+      document.getElementById('view-requests').style.display = v === 'requests' ? 'block' : 'none';
+      document.getElementById('view-quality').style.display = v === 'quality' ? 'block' : 'none';
+      if (v === 'quality') renderQuality();
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  var DEPT_ORDER = ['قسم الكيمياء','قسم الفيزياء','قسم الرياضيات','قسم جيولوجيا','قسم علم الحيوان','قسم علم النبات'];
+  var YEAR_ORDER = ['الفرقة الأولى','الفرقة الثانية','الفرقة الثالثة','الفرقة الرابعة'];
+
+  function countBy(items, key, order){
+    var map = {};
+    (order || []).forEach(function(k){ map[k] = 0; });
+    items.forEach(function(x){
+      var k = x[key] || 'غير محدد';
+      map[k] = (map[k] || 0) + 1;
+    });
+    return map;
+  }
+
+  function renderQuality(){
+    var host = document.getElementById('view-quality');
+    var data = adminData;
+
+    if (!data.length){
+      host.innerHTML = '<div class="card"><div class="empty-state"><div class="big">📊</div>' +
+        'لسه مفيش بيانات كفاية لبناء تقرير الجودة</div></div>';
+      return;
+    }
+
+    var ideas = data.filter(function(x){ return x.type === 'idea'; });
+    var questions = data.filter(function(x){ return x.type === 'question'; });
+    var byDept = countBy(data, 'dept', DEPT_ORDER);
+    var byYear = countBy(data, 'year', YEAR_ORDER);
+    var byProgram = countBy(data, 'program');
+
+    var deptsActive = DEPT_ORDER.filter(function(d){ return byDept[d] > 0; });
+    var topDept = DEPT_ORDER.slice().sort(function(a,b){ return byDept[b] - byDept[a]; })[0];
+    var topYear = YEAR_ORDER.slice().sort(function(a,b){ return byYear[b] - byYear[a]; })[0];
+
+    var avgLen = Math.round(data.reduce(function(s,x){ return s + (x.text||'').length; }, 0) / data.length);
+    var complete = data.filter(function(x){ return x.name && x.year && x.dept && x.program && (x.text||'').length >= 40; }).length;
+    var completeness = Math.round(complete / data.length * 100);
+    var coverage = Math.round(deptsActive.length / DEPT_ORDER.length * 100);
+    var richness = Math.min(100, Math.round(avgLen / 160 * 100));
+    var balance = 100 - Math.round(Math.abs(ideas.length - questions.length) / data.length * 100);
+
+    var score = Math.round(coverage * 0.3 + completeness * 0.3 + richness * 0.2 + balance * 0.2);
+
+    var days = {};
+    data.forEach(function(x){
+      var d = new Date(x.createdAt);
+      if (isNaN(d)) return;
+      days[d.toISOString().slice(0,10)] = (days[d.toISOString().slice(0,10)] || 0) + 1;
+    });
+    var dayKeys = Object.keys(days).sort();
+    var peakDay = dayKeys.slice().sort(function(a,b){ return days[b] - days[a]; })[0];
+    var activeProgs = Object.keys(byProgram).filter(function(p){ return p && p !== 'غير محدد'; }).length;
+
+    var grade = score >= 85 ? 'ممتاز' : score >= 70 ? 'جيد جدًا' : score >= 55 ? 'جيد' : 'يحتاج تحسين';
+
+    host.innerHTML = '';
+
+    /* ----- رأس التقرير ----- */
+    var head = document.createElement('div');
+    head.className = 'report-head';
+    head.innerHTML =
+      '<span class="vision">🇪🇬 تم تطويره دعمًا لرؤية مصر 2030 — محور التعليم والبحث العلمي</span>' +
+      '<h2>تقرير إحصائيات الجودة</h2>' +
+      '<p>تقرير تحليلي لمشاركة طلاب كلية العلوم عبر بوابة شؤون الطلاب الرقمية، ' +
+      'يرصد حجم المشاركة وتوزيعها على الأقسام والفرق الدراسية ومستوى اكتمال البيانات، ' +
+      'بما يدعم اتخاذ القرار وتطوير الخدمة الطلابية وفق معايير الجودة والاعتماد.</p>' +
+      '<div class="stamp">جامعة المنصورة — كلية العلوم · إدارة شؤون الطلاب · العام الدراسي ' +
+      escapeHtml(data[0].academicYear || academicYear()) +
+      ' · صدر بتاريخ ' + new Date().toLocaleDateString('ar-EG') + '</div>';
+    host.appendChild(head);
+
+    /* ----- المؤشر العام + KPIs ----- */
+    var scoreWrap = document.createElement('div');
+    scoreWrap.className = 'score-wrap';
+
+    var circ = 2 * Math.PI * 70;
+    scoreWrap.innerHTML =
+      '<div class="card score-card">' +
+        '<div class="score-ring">' +
+          '<svg viewBox="0 0 170 170" width="170" height="170">' +
+            '<circle cx="85" cy="85" r="70" fill="none" stroke="var(--line)" stroke-width="14"/>' +
+            '<circle cx="85" cy="85" r="70" fill="none" stroke="var(--primary)" stroke-width="14" ' +
+              'stroke-linecap="round" stroke-dasharray="' + circ + '" ' +
+              'stroke-dashoffset="' + (circ - circ * score / 100) + '" ' +
+              'transform="rotate(-90 85 85)"/>' +
+          '</svg>' +
+          '<div class="val"><div class="num">' + score + '</div><div class="of">من 100</div></div>' +
+        '</div>' +
+        '<div class="score-label">مؤشر جودة المشاركة: ' + grade + '</div>' +
+        '<div class="score-sub">تغطية الأقسام + اكتمال البيانات + ثراء المحتوى + توازن الخدمات</div>' +
+      '</div>' +
+      '<div class="card">' +
+        '<h3 style="margin:0 0 14px;font-size:17px;">المؤشرات الرئيسية</h3>' +
+        '<div class="kpi-grid">' +
+          kpi('إجمالي الطلبات', data.length) +
+          kpi('أفكار إبداعية', ideas.length) +
+          kpi('أسئلة واستفسارات', questions.length) +
+          kpi('الأقسام المشاركة', deptsActive.length + ' <small>/ 6</small>') +
+          kpi('البرامج النوعية الممثلة', activeProgs) +
+          kpi('نسبة اكتمال البيانات', completeness + '<small>%</small>') +
+          kpi('متوسط طول الطلب', avgLen + ' <small>حرف</small>') +
+          kpi('أيام النشاط', dayKeys.length + ' <small>يوم</small>') +
+        '</div>' +
+      '</div>';
+    host.appendChild(scoreWrap);
+
+    /* ----- القراءة التحليلية ----- */
+    var findings = document.createElement('div');
+    findings.className = 'card';
+    findings.style.marginBottom = '20px';
+    var fl = [
+      ['🏆', 'أعلى الأقسام مشاركةً هو <b>' + escapeHtml(topDept) + '</b> بعدد <b>' + byDept[topDept] + '</b> طلب، ويمثل ' +
+        Math.round(byDept[topDept] / data.length * 100) + '% من إجمالي المشاركات.'],
+      ['🎓', 'أكثر الفرق تفاعلًا هي <b>' + escapeHtml(topYear) + '</b> بعدد <b>' + byYear[topYear] + '</b> طلب.'],
+      ['🧭', 'نسبة تغطية الأقسام العلمية بلغت <b>' + coverage + '%</b> (' + deptsActive.length + ' من 6 أقسام).'],
+      ['📝', 'متوسط طول الطلب <b>' + avgLen + '</b> حرف، ونسبة الطلبات مكتملة البيانات <b>' + completeness + '%</b>.'],
+      [ideas.length >= questions.length ? '💡' : '❓',
+        'التوزيع بين الخدمتين: <b>' + ideas.length + '</b> فكرة مقابل <b>' + questions.length + '</b> استفسار، ' +
+        'بمؤشر توازن <b>' + balance + '%</b>.'],
+      ['📅', 'أعلى يوم نشاطًا كان <b>' + (peakDay ? new Date(peakDay).toLocaleDateString('ar-EG') : '—') +
+        '</b> بعدد <b>' + (peakDay ? days[peakDay] : 0) + '</b> طلب.']
+    ];
+    var missing = DEPT_ORDER.filter(function(d){ return !byDept[d]; });
+    if (missing.length){
+      fl.push(['⚠️', 'أقسام لم تُسجّل أي مشاركة حتى الآن: <b>' + missing.map(escapeHtml).join('، ') +
+        '</b> — يُوصى بتفعيل التوعية بالبوابة داخلها.']);
+    } else {
+      fl.push(['✅', 'جميع الأقسام العلمية الستة سجّلت مشاركات — تغطية كاملة.']);
+    }
+    findings.innerHTML = '<h3 style="margin:0 0 4px;font-size:17px;">القراءة التحليلية</h3>' +
+      '<p class="cap" style="margin:0 0 6px;font-size:12.5px;color:var(--ink-soft);">أهم ما ترصده البيانات خلال الفترة الحالية</p>' +
+      '<ul class="finding-list">' +
+      fl.map(function(f){ return '<li><span class="mark">' + f[0] + '</span><span>' + f[1] + '</span></li>'; }).join('') +
+      '</ul>';
+    host.appendChild(findings);
+
+    /* ----- الرسوم البيانية ----- */
+    host.appendChild(chartCard(
+      'توزيع الطلبات على الأقسام العلمية',
+      'رسم أعمدة مجمّع — المحور الأفقي (X): القسم · الرأسي (Y): عدد الطلبات · السلسلة (Z): نوع الخدمة',
+      groupedBarSVG(DEPT_ORDER, ideas, questions),
+      true
+    ));
+
+    host.appendChild(chartCard(
+      'المدرج التكراري للفرق الدراسية',
+      'هيستوجرام — توزيع تكرار الطلبات على الفرق الأربع',
+      histogramSVG(YEAR_ORDER.map(function(y){ return [y, byYear[y]]; }))
+    ));
+
+    host.appendChild(chartCard(
+      'خريطة الجودة ثلاثية الأبعاد',
+      'رسم فقاعي — X: عدد الطلبات · Y: متوسط طول الطلب · Z: حجم الفقاعة = عدد البرامج النوعية المشاركة في القسم',
+      bubbleSVG(DEPT_ORDER, data)
+    ));
+
+    host.appendChild(chartCard(
+      'تطور المشاركة عبر الأيام',
+      'منحنى زمني — عدد الطلبات المسجلة يوميًا',
+      lineSVG(dayKeys, days)
+    ));
+  }
+
+  function kpi(k, v){
+    return '<div class="kpi"><div class="k">' + k + '</div><div class="v">' + v + '</div></div>';
+  }
+
+  function chartCard(title, cap, svg, withLegend){
+    var c = document.createElement('div');
+    c.className = 'card chart-card';
+    c.innerHTML = '<h3>' + title + '</h3><p class="cap">' + cap + '</p>' +
+      '<div class="chart-scroll">' + svg + '</div>' +
+      (withLegend ? '<div class="legend">' +
+        '<span><i style="background:var(--primary)"></i>أفكار إبداعية وريادة أعمال</span>' +
+        '<span><i style="background:var(--accent)"></i>أسئلة واستفسارات</span></div>' : '');
+    return c;
+  }
+
+  /* ---------- مولدات الرسوم (SVG) ---------- */
+
+  function axes(w, h, pad){
+    return '<line x1="' + pad.l + '" y1="' + (h - pad.b) + '" x2="' + (w - pad.r) + '" y2="' + (h - pad.b) +
+             '" stroke="var(--line)" stroke-width="1.5"/>' +
+           '<line x1="' + pad.l + '" y1="' + pad.t + '" x2="' + pad.l + '" y2="' + (h - pad.b) +
+             '" stroke="var(--line)" stroke-width="1.5"/>';
+  }
+
+  function yTicks(w, h, pad, max){
+    var out = '', steps = Math.max(1, Math.min(4, max));   // قيم صحيحة بدون تكرار
+    for (var i = 0; i <= steps; i++){
+      var v = Math.round(max / steps * i);
+      var y = (h - pad.b) - (h - pad.t - pad.b) * (i / steps);
+      out += '<line x1="' + pad.l + '" y1="' + y + '" x2="' + (w - pad.r) + '" y2="' + y +
+             '" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" opacity="0.6"/>' +
+             '<text x="' + (pad.l - 8) + '" y="' + (y + 4) + '" text-anchor="end" font-size="11" ' +
+             'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + v + '</text>';
+    }
+    return out;
+  }
+
+  function shortDept(d){ return String(d).replace('قسم ', ''); }
+
+  function groupedBarSVG(depts, ideas, questions){
+    var w = 720, h = 330, pad = {t:20, r:20, b:56, l:44};
+    var ci = {}, cq = {};
+    depts.forEach(function(d){ ci[d] = 0; cq[d] = 0; });
+    ideas.forEach(function(x){ if (ci[x.dept] !== undefined) ci[x.dept]++; });
+    questions.forEach(function(x){ if (cq[x.dept] !== undefined) cq[x.dept]++; });
+
+    var max = Math.max(1, Math.max.apply(null, depts.map(function(d){ return Math.max(ci[d], cq[d]); })));
+    max = Math.ceil(max / 2) * 2 || 2;
+
+    var plotW = w - pad.l - pad.r, plotH = h - pad.t - pad.b;
+    var slot = plotW / depts.length, bw = Math.min(26, slot / 3.2);
+
+    var bars = '';
+    depts.forEach(function(d, i){
+      var cx = pad.l + slot * i + slot / 2;
+      [[ci[d], 'var(--primary)', -1], [cq[d], 'var(--accent)', 1]].forEach(function(p){
+        var bh = plotH * (p[0] / max);
+        var x = cx + (p[2] === -1 ? -bw - 3 : 3);
+        var y = (h - pad.b) - bh;
+        bars += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + Math.max(bh, 0) +
+                '" rx="4" fill="' + p[1] + '"><title>' + shortDept(d) + ': ' + p[0] + '</title></rect>';
+        if (p[0] > 0){
+          bars += '<text x="' + (x + bw/2) + '" y="' + (y - 6) + '" text-anchor="middle" font-size="11" ' +
+                  'font-weight="700" fill="var(--ink)" font-family="Tajawal, sans-serif">' + p[0] + '</text>';
+        }
+      });
+      bars += '<text x="' + cx + '" y="' + (h - pad.b + 20) + '" text-anchor="middle" font-size="11.5" ' +
+              'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + shortDept(d) + '</text>';
+    });
+
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">' +
+      yTicks(w, h, pad, max) + axes(w, h, pad) + bars +
+      '<text x="' + (w/2) + '" y="' + (h - 8) + '" text-anchor="middle" font-size="11.5" font-weight="700" ' +
+      'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">الأقسام العلمية (X)</text>' +
+      '</svg>';
+  }
+
+  function histogramSVG(pairs){
+    var w = 720, h = 300, pad = {t:20, r:20, b:52, l:44};
+    var max = Math.max(1, Math.max.apply(null, pairs.map(function(p){ return p[1]; })));
+    max = Math.ceil(max / 2) * 2 || 2;
+    var plotW = w - pad.l - pad.r, plotH = h - pad.t - pad.b;
+    var slot = plotW / pairs.length, bw = slot * 0.74;
+
+    var bars = '';
+    pairs.forEach(function(p, i){
+      var bh = plotH * (p[1] / max);
+      var x = pad.l + slot * i + (slot - bw) / 2;
+      var y = (h - pad.b) - bh;
+      bars += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + Math.max(bh, 0) +
+              '" fill="var(--primary-2)" opacity="0.88"><title>' + p[0] + ': ' + p[1] + '</title></rect>';
+      bars += '<text x="' + (x + bw/2) + '" y="' + (y - 7) + '" text-anchor="middle" font-size="12" ' +
+              'font-weight="700" fill="var(--ink)" font-family="Tajawal, sans-serif">' + p[1] + '</text>';
+      bars += '<text x="' + (x + bw/2) + '" y="' + (h - pad.b + 20) + '" text-anchor="middle" font-size="11.5" ' +
+              'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + p[0] + '</text>';
+    });
+
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">' +
+      yTicks(w, h, pad, max) + axes(w, h, pad) + bars +
+      '<text x="' + (w/2) + '" y="' + (h - 6) + '" text-anchor="middle" font-size="11.5" font-weight="700" ' +
+      'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">الفرق الدراسية (X) — التكرار (Y)</text>' +
+      '</svg>';
+  }
+
+  function bubbleSVG(depts, data){
+    var w = 720, h = 420, pad = {t:30, r:36, b:58, l:54};
+    var stats = depts.map(function(d){
+      var rows = data.filter(function(x){ return x.dept === d; });
+      var progs = {};
+      rows.forEach(function(x){ if (x.program) progs[x.program] = 1; });
+      return {
+        dept: d,
+        count: rows.length,
+        avg: rows.length ? Math.round(rows.reduce(function(s,x){ return s + (x.text||'').length; }, 0) / rows.length) : 0,
+        progs: Object.keys(progs).length
+      };
+    }).filter(function(s){ return s.count > 0; });
+
+    if (!stats.length) return '<svg viewBox="0 0 720 120"><text x="360" y="60" text-anchor="middle" font-size="13" fill="var(--ink-soft)" font-family="Tajawal, sans-serif">لا توجد بيانات</text></svg>';
+
+    var maxX = Math.max.apply(null, stats.map(function(s){ return s.count; })) || 1;
+    var maxY = Math.max.apply(null, stats.map(function(s){ return s.avg; })) || 1;
+    var maxZ = Math.max.apply(null, stats.map(function(s){ return s.progs; })) || 1;
+    var plotW = w - pad.l - pad.r, plotH = h - pad.t - pad.b;
+
+    var grid = '';
+    for (var i = 0; i <= 4; i++){
+      var gy = (h - pad.b) - plotH * (i/4);
+      grid += '<line x1="' + pad.l + '" y1="' + gy + '" x2="' + (w - pad.r) + '" y2="' + gy +
+              '" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" opacity="0.55"/>' +
+              '<text x="' + (pad.l - 8) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="10.5" ' +
+              'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + Math.round(maxY/4*i) + '</text>';
+    }
+
+    var nodes = stats.map(function(s){
+      return {
+        s: s,
+        x: pad.l + plotW * (s.count / (maxX * 1.25)),
+        y: (h - pad.b) - plotH * (s.avg / (maxY * 1.35)),
+        r: 12 + 16 * (s.progs / maxZ)
+      };
+    });
+
+    // تباعد بسيط يمنع تراكب الفقاعات المتساوية
+    for (var pass = 0; pass < 60; pass++){
+      for (var a = 0; a < nodes.length; a++){
+        for (var b = a + 1; b < nodes.length; b++){
+          var n1 = nodes[a], n2 = nodes[b];
+          var dx = n2.x - n1.x, dy = n2.y - n1.y;
+          var dist = Math.sqrt(dx*dx + dy*dy) || 0.01;
+          var need = n1.r + n2.r + 16;
+          if (dist < need){
+            var push = (need - dist) / 2;
+            var ux = dx / dist, uy = dy / dist;
+            n1.x -= ux * push; n1.y -= uy * push;
+            n2.x += ux * push; n2.y += uy * push;
+          }
+        }
+      }
+    }
+
+    var dots = '';
+    nodes.forEach(function(n){
+      var s = n.s;
+      var cx = Math.max(pad.l + n.r + 4, Math.min(w - pad.r - n.r - 4, n.x));
+      var cy = Math.max(pad.t + n.r + 4, Math.min(h - pad.b - n.r - 16, n.y));
+      dots += '<circle cx="' + cx + '" cy="' + cy + '" r="' + n.r + '" fill="var(--primary-2)" opacity="0.3"/>' +
+              '<circle cx="' + cx + '" cy="' + cy + '" r="' + n.r + '" fill="none" stroke="var(--primary)" stroke-width="2">' +
+              '<title>' + shortDept(s.dept) + ' — طلبات: ' + s.count + ' · متوسط الطول: ' + s.avg +
+              ' · برامج: ' + s.progs + '</title></circle>' +
+              '<text x="' + cx + '" y="' + (cy + 4) + '" text-anchor="middle" font-size="11" font-weight="700" ' +
+              'fill="var(--primary)" font-family="Tajawal, sans-serif">' + s.progs + '</text>' +
+              '<text x="' + cx + '" y="' + (cy + n.r + 15) + '" text-anchor="middle" font-size="11" ' +
+              'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + shortDept(s.dept) + '</text>';
+    });
+
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">' + grid + axes(w, h, pad) + dots +
+      '<text x="' + (w/2) + '" y="' + (h - 8) + '" text-anchor="middle" font-size="11.5" font-weight="700" ' +
+      'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">عدد الطلبات (X)</text>' +
+      '<text transform="translate(16,' + (h/2) + ') rotate(-90)" text-anchor="middle" font-size="11.5" ' +
+      'font-weight="700" fill="var(--ink-soft)" font-family="Tajawal, sans-serif">متوسط طول الطلب (Y)</text>' +
+      '</svg>';
+  }
+
+  function lineSVG(dayKeys, days){
+    var w = 720, h = 300, pad = {t:24, r:24, b:52, l:44};
+    if (!dayKeys.length) return '<svg viewBox="0 0 720 120"><text x="360" y="60" text-anchor="middle" font-size="13" fill="var(--ink-soft)" font-family="Tajawal, sans-serif">لا توجد بيانات</text></svg>';
+
+    var max = Math.max.apply(null, dayKeys.map(function(k){ return days[k]; })) || 1;
+    max = Math.max(2, Math.ceil(max));
+    var plotW = w - pad.l - pad.r, plotH = h - pad.t - pad.b;
+    var stepX = dayKeys.length > 1 ? plotW / (dayKeys.length - 1) : 0;
+
+    var pts = dayKeys.map(function(k, i){
+      var x = pad.l + (dayKeys.length > 1 ? stepX * i : plotW / 2);
+      var y = (h - pad.b) - plotH * (days[k] / max);
+      return [x, y, k];
+    });
+
+    var path = pts.map(function(p, i){ return (i ? 'L' : 'M') + p[0] + ' ' + p[1]; }).join(' ');
+    var area = path + ' L' + pts[pts.length-1][0] + ' ' + (h - pad.b) + ' L' + pts[0][0] + ' ' + (h - pad.b) + ' Z';
+
+    var dots = pts.map(function(p){
+      var label = new Date(p[2]).toLocaleDateString('ar-EG', {day:'numeric', month:'numeric'});
+      return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="4.5" fill="var(--surface)" stroke="var(--primary)" stroke-width="2.5">' +
+             '<title>' + label + ': ' + days[p[2]] + '</title></circle>' +
+             '<text x="' + p[0] + '" y="' + (h - pad.b + 19) + '" text-anchor="middle" font-size="10.5" ' +
+             'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">' + label + '</text>';
+    }).join('');
+
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img">' +
+      yTicks(w, h, pad, max) + axes(w, h, pad) +
+      '<path d="' + area + '" fill="var(--primary)" opacity="0.12"/>' +
+      '<path d="' + path + '" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linejoin="round"/>' +
+      dots +
+      '<text x="' + (w/2) + '" y="' + (h - 6) + '" text-anchor="middle" font-size="11.5" font-weight="700" ' +
+      'fill="var(--ink-soft)" font-family="Tajawal, sans-serif">التاريخ (X) — عدد الطلبات (Y)</text>' +
+      '</svg>';
+  }
+
+  function resetForm(){
+    form.reset();
+    selectedImage = null;
+    imageInput.value = '';
+    previewWrap.style.display = 'none';
+    dropzone.style.display = 'block';
+    charCount.textContent = '0';
+    progSelect.innerHTML = '<option value="">—</option>';
+    progSelect.disabled = true;
+    programHint.textContent = '(اختر القسم أولًا)';
+    ['err-name','err-email','err-phone','err-year','err-dept','err-idea'].forEach(function(id){
+      document.getElementById(id).classList.remove('show');
+    });
+    document.getElementById('form-card').style.display = 'block';
+    document.getElementById('success-panel').style.display = 'none';
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('تم نسخ تفاصيل الفكرة ✅');
+      }).catch(function(){ showToast('تعذر النسخ، حاول مرة أخرى'); });
+    } else {
+      showToast('النسخ غير مدعوم في هذا المتصفح');
+    }
+  }
+
+  // Works both inside the Claude artifact viewer (downloads capability)
+  // and on a normal web host (plain blob download).
+  async function saveFile(filename, data){
+    if (window.claude && typeof window.claude.use === 'function'){
+      var downloads = await window.claude.use('downloads');
+      if (downloads){
+        await downloads.save({ filename: filename, data: data });
+        return;
+      }
+    }
+    var blob = (data instanceof Blob) ? data : new Blob([data], {type:'text/plain;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+
+  async function saveImage(file){
+    if (!file) return;
+    try{
+      await saveFile(file.name || 'صورة-المرفق.jpg', file);
+      showToast('تم تجهيز الصورة للحفظ ✅');
+    } catch(err){
+      showToast('تعذر تنزيل الصورة الآن');
+    }
+  }
+
+  async function saveText(filename, text){
+    try{
+      await saveFile(filename, text);
+      showToast('تم تجهيز الملف للحفظ ✅');
+    } catch(err){
+      showToast('تعذر تنزيل الملف الآن — جرّبي النسخ');
+    }
+  }
+})();
+</script>
+</body>
+</html>
