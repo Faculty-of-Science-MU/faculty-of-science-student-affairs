@@ -381,6 +381,85 @@
   .pv-remove{ background:none; border:none; color:#C0392B; font-weight:700; cursor:pointer; font-size:13px; }
 
   .submit-row{ margin-top:26px; display:flex; justify-content:flex-end; }
+
+  /* ---------- correction form extras ---------- */
+  .unit-eyebrow{
+    display:inline-block; font-size:12px; font-weight:700; color:var(--primary-2);
+    letter-spacing:.4px; margin-bottom:6px;
+  }
+  .sheet-badge{
+    display:inline-block; background:linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #a06d10));
+    color:#fff; font-family:"Tajawal",sans-serif; font-weight:800; font-size:15px;
+    padding:3px 13px; border-radius:9px; letter-spacing:.8px; vertical-align:middle;
+    margin-right:8px; box-shadow:0 4px 12px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  #corr-form-card{ position:relative; }
+  .term-cloud{
+    position:absolute; top:18px; left:18px; text-align:center; line-height:1.4;
+    background:var(--surface-2); border:2px solid var(--accent); border-radius:999px;
+    padding:8px 20px; box-shadow:0 6px 16px var(--shadow-soft);
+  }
+  .term-cloud span{ display:block; font-size:11px; color:var(--ink-soft); font-weight:700; }
+  .term-cloud strong{ display:block; font-size:14px; color:var(--accent); font-weight:800; }
+  @media (max-width:620px){
+    .term-cloud{ position:static; display:inline-block; margin-bottom:14px; }
+  }
+
+  .form-note{
+    display:flex; align-items:center; gap:10px; margin-top:24px;
+    background:color-mix(in srgb, var(--accent) 16%, var(--surface));
+    border:1.5px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+    border-radius:var(--radius-sm); padding:14px 18px;
+    font-size:14px; font-weight:700; color:var(--ink); line-height:1.7;
+  }
+  .form-note-icon{ flex:none; font-size:17px; }
+
+  .form-signature{
+    margin-top:28px; padding-top:18px; border-top:1px dashed var(--line); text-align:center;
+  }
+  .form-signature .sig-role{ font-size:12.5px; color:var(--ink-soft); font-weight:700; }
+  .form-signature .sig-name{
+    font-family:"El Messiri",sans-serif; font-size:15px; font-weight:800; color:var(--primary); margin-top:3px;
+  }
+  .form-signature .sig-code{ font-size:11px; color:var(--ink-soft); margin-top:10px; letter-spacing:.5px; }
+
+  .radio-list{ display:flex; flex-direction:column; gap:8px; }
+  .radio-item{
+    display:flex; align-items:center; gap:10px; border:1.5px solid var(--line); border-radius:var(--radius-sm);
+    padding:10px 14px; background:var(--surface-2); cursor:pointer; transition:all .2s ease;
+  }
+  .radio-item:has(input:checked){ border-color:var(--primary-2); background:color-mix(in srgb, var(--primary-2) 8%, var(--surface-2)); }
+  .radio-item input{ width:17px; height:17px; accent-color:var(--primary); cursor:pointer; flex:none; }
+  .radio-item span{ font-size:14px; color:var(--ink); font-weight:600; }
+
+  .sub-h3{ margin:26px 0 4px; font-size:17px; color:var(--ink); border-top:1px dashed var(--line); padding-top:20px; }
+  .qtype-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:8px; }
+  @media (max-width:760px){ .qtype-grid{ grid-template-columns:1fr; } }
+  .qtype-card{
+    border:1.5px solid var(--line); border-radius:var(--radius-sm); padding:14px 16px;
+    background:var(--surface-2); transition:border-color .2s ease, background .2s ease;
+  }
+  .qtype-card.on{ border-color:var(--primary-2); background:color-mix(in srgb, var(--primary-2) 6%, var(--surface-2)); }
+  .qtype-head{ display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; }
+  .qtype-head input{ width:18px; height:18px; accent-color:var(--primary); cursor:pointer; }
+  .qtype-head span{ font-weight:700; font-size:14.5px; color:var(--ink); }
+  .qtype-fields{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px; }
+  .qtype-fields.hidden{ display:none; }
+  .qtype-fields label{ display:block; font-size:12px; color:var(--ink-soft); margin-bottom:4px; }
+  .qtype-fields input{
+    width:100%; border:1.5px solid var(--line); background:var(--surface); color:var(--ink);
+    border-radius:8px; padding:8px 10px; font-size:13.5px; font-family:inherit;
+  }
+  .qtype-fields input:focus{ outline:none; border-color:var(--primary-2); }
+
+  .check-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; margin-bottom:8px; }
+  .check-item{
+    display:flex; align-items:center; gap:8px; border:1.5px solid var(--line); border-radius:var(--radius-sm);
+    padding:10px 12px; background:var(--surface-2); cursor:pointer; transition:all .2s ease;
+  }
+  .check-item:has(input:checked){ border-color:var(--primary-2); background:color-mix(in srgb, var(--primary-2) 8%, var(--surface-2)); }
+  .check-item input{ width:17px; height:17px; accent-color:var(--primary); cursor:pointer; flex:none; }
+  .check-item span{ font-size:13px; color:var(--ink); line-height:1.5; }
   .error-msg{ color:#C0392B; font-size:13px; margin-top:-10px; margin-bottom:16px; display:none; }
   .error-msg.show{ display:block; }
 
@@ -439,8 +518,9 @@
   .mode-banner.remote{ background:color-mix(in srgb, var(--success) 12%, var(--surface)); border-color:color-mix(in srgb, var(--success) 40%, var(--line)); color:var(--ink); }
   .mode-banner b{ display:block; margin-bottom:2px; }
 
-  .stats-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
-  @media (max-width:620px){ .stats-row{ grid-template-columns:1fr; } }
+  .stats-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+  @media (max-width:860px){ .stats-row{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .stats-row{ grid-template-columns:1fr; } }
   .stat-tile{
     background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-md);
     padding:18px 20px; box-shadow:0 8px 20px var(--shadow-soft);
@@ -474,6 +554,7 @@
   .type-chip{ font-size:11.5px; font-weight:700; padding:4px 11px; border-radius:999px; }
   .type-chip.idea{ background:var(--accent-soft); color:var(--accent); }
   .type-chip.question{ background:color-mix(in srgb, var(--primary-2) 15%, transparent); color:var(--primary-2); }
+  .type-chip.correction{ background:color-mix(in srgb, var(--success) 18%, transparent); color:var(--success); }
   .sub-date{ margin-right:auto; font-size:12px; color:var(--ink-soft); }
   .sub-meta{ display:flex; flex-wrap:wrap; gap:8px 18px; font-size:13px; color:var(--ink-soft); margin-bottom:12px; }
   .sub-meta span b{ color:var(--ink); font-weight:700; }
@@ -683,12 +764,14 @@
         <div class="stat-tile"><div class="k">إجمالي الطلبات</div><div class="v" id="statAll">0</div></div>
         <div class="stat-tile"><div class="k">أفكار إبداعية وريادة أعمال</div><div class="v" id="statIdea">0</div></div>
         <div class="stat-tile"><div class="k">أسئلة واستفسارات</div><div class="v" id="statQuestion">0</div></div>
+        <div class="stat-tile"><div class="k">نماذج التصحيح الإلكتروني</div><div class="v" id="statCorrection">0</div></div>
       </div>
 
       <div class="card toolbar no-print">
         <button class="filter-pill active" data-filter="all">الكل</button>
         <button class="filter-pill" data-filter="idea">أفكار إبداعية</button>
         <button class="filter-pill" data-filter="question">أسئلة واستفسارات</button>
+        <button class="filter-pill" data-filter="correction">التصحيح الإلكتروني</button>
         <input type="search" id="adminSearch" placeholder="ابحث بالاسم أو القسم أو النص...">
         <span class="tool-sep"></span>
         <button class="mini-btn" id="refreshBtn">🔄 تحديث</button>
@@ -862,6 +945,178 @@
   </div>
 </div>
 
+<!-- ============ ELECTRONIC CORRECTION SCREEN ============ -->
+<div id="screen-correction" class="shell">
+  <div class="back-row">
+    <button class="back-link" id="corrBackBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 6l-6 6 6 6"/></svg>
+      الرئيسية
+    </button>
+  </div>
+
+  <header class="module-header">
+    <img class="seal" src="assets/logo-university.png" alt="شعار جامعة المنصورة">
+    <div class="module-title">
+      <span class="unit-eyebrow">وحدة التصحيح الإلكتروني</span>
+      <h1>نموذج مواصفات إجابة التصحيح الإلكتروني <span class="sheet-badge">Sheet.B</span></h1>
+      <p>كلية العلوم — جامعة المنصورة · نموذج رقم SCI-ESA-01-FM-04</p>
+    </div>
+    <img class="seal" src="assets/logo-college.png" alt="شعار كلية العلوم">
+  </header>
+
+  <div class="idea-layout">
+    <div class="card" id="corr-form-card">
+      <div class="term-cloud">
+        <span>منتصف فصل</span>
+        <strong id="termCloudText">يناير 2027</strong>
+      </div>
+
+      <h2>بيانات نموذج التصحيح</h2>
+      <p class="muted">نفس بنود النموذج الورقي بالظبط — املي البيانات وابعتيها لوحدة التصحيح الإلكتروني</p>
+
+      <div class="fixed-info">
+        <span><b>العام الجامعي:</b> <span id="corrAcadYearText"></span></span>
+      </div>
+
+      <form id="corrForm" novalidate>
+        <div class="two-col">
+          <div class="field">
+            <label for="corrInstructor">أستاذ المقرر <span class="req">*</span></label>
+            <input type="text" id="corrInstructor" placeholder="أ.د/ ..." required>
+            <div class="error-msg" id="corr-err-instructor">من فضلك اكتب اسم أستاذ المقرر</div>
+          </div>
+          <div class="field">
+            <label for="corrMobile">رقم الموبايل <span class="req">*</span></label>
+            <input type="tel" id="corrMobile" placeholder="01xxxxxxxxx" required>
+            <div class="error-msg" id="corr-err-mobile">من فضلك اكتب رقم الموبايل</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="corrCourseName">اسم المقرر <span class="req">*</span></label>
+            <input type="text" id="corrCourseName" required>
+            <div class="error-msg" id="corr-err-coursename">من فضلك اكتب اسم المقرر</div>
+          </div>
+          <div class="field">
+            <label for="corrCourseCode">كود المقرر <span class="req">*</span></label>
+            <input type="text" id="corrCourseCode" required>
+            <div class="error-msg" id="corr-err-coursecode">من فضلك اكتب كود المقرر</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="corrExamDate">تاريخ الامتحان <span class="req">*</span></label>
+            <input type="date" id="corrExamDate" required>
+            <div class="error-msg" id="corr-err-date">من فضلك اختر تاريخ الامتحان</div>
+          </div>
+          <div class="field">
+            <label for="corrRegulation">اللائحة <span class="req">*</span></label>
+            <select id="corrRegulation" required>
+              <option value="">اختر اللائحة</option>
+              <option>لائحة 2008</option>
+              <option>لائحة 2019</option>
+            </select>
+            <div class="error-msg" id="corr-err-regulation">من فضلك اختر اللائحة</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>المستوى <span class="req">*</span></label>
+          <div class="radio-list" id="corrLevelList">
+            <label class="radio-item"><input type="radio" name="corrLevel" value="الأول"><span>الأول</span></label>
+            <label class="radio-item"><input type="radio" name="corrLevel" value="الثاني"><span>الثاني</span></label>
+            <label class="radio-item"><input type="radio" name="corrLevel" value="الثالث"><span>الثالث</span></label>
+            <label class="radio-item"><input type="radio" name="corrLevel" value="الرابع"><span>الرابع</span></label>
+          </div>
+          <div class="error-msg" id="corr-err-level">من فضلك اختر المستوى</div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="corrTotalMark">درجة الامتحان <span class="req">*</span></label>
+            <input type="number" id="corrTotalMark" min="1" step="0.5" required>
+            <div class="error-msg" id="corr-err-mark">من فضلك اكتب درجة الامتحان</div>
+          </div>
+          <div class="field">
+            <label for="corrModelsCount">عدد النماذج <span class="req">*</span></label>
+            <input type="number" id="corrModelsCount" min="1" step="1" required>
+            <div class="error-msg" id="corr-err-models">من فضلك اكتب عدد النماذج</div>
+          </div>
+        </div>
+
+        <h3 class="sub-h3">نوع ورقم السؤال</h3>
+        <p class="muted" style="margin-bottom:16px;">فعّلي كل نوع أسئلة موجود في الامتحان واملي بياناته — لازم نوع واحد على الأقل</p>
+        <div class="error-msg" id="corr-err-qtypes">من فضلك فعّلي نوع سؤال واحد على الأقل واملي بياناته</div>
+
+        <div class="qtype-grid" id="qtypeGrid"></div>
+
+        <h3 class="sub-h3">البرنامج الدراسي</h3>
+        <p class="muted" style="margin-bottom:12px;">اختاري كل برنامج يخص طلاب هذا المقرر (اختيار متعدد)</p>
+        <div class="error-msg" id="corr-err-study">من فضلك اختاري برنامج دراسي واحد على الأقل</div>
+        <div class="check-grid" id="corrStudyPrograms"></div>
+
+        <h3 class="sub-h3" style="margin-top:22px;">البرامج النوعية</h3>
+        <p class="muted" style="margin-bottom:12px;">اختياري — حددي البرنامج النوعي لو المقرر خاص ببرنامج معين</p>
+        <div class="check-grid" id="corrSpecialPrograms"></div>
+
+        <div class="form-note">
+          <span class="form-note-icon">⚠️</span>
+          برجاء إجابة النموذج عند تسليم الكنترول الفرعي بعد انتهاء الامتحان
+        </div>
+
+        <div class="submit-row" style="margin-top:22px;">
+          <button type="submit" class="btn btn-primary" id="corrSubmitBtn">إرسال نموذج التصحيح ←</button>
+        </div>
+      </form>
+
+      <div class="form-signature">
+        <div class="sig-role">وكيل الكلية لشئون التعليم والطلاب</div>
+        <div class="sig-name">أ.د. / محسن عوض زهران</div>
+        <div class="sig-code">SCI-ESA-01-FM-04</div>
+      </div>
+    </div>
+
+    <aside class="card info-card">
+      <h3>قبل ما تبعتي النموذج</h3>
+      <ul class="info-list">
+        <li><span class="dot"></span>البيانات الأساسية وبيانات النوذج إلزامية، والبرامج النوعية اختيارية.</li>
+        <li><span class="dot"></span>فعّلي بس أنواع الأسئلة الموجودة فعليًا في الامتحان.</li>
+        <li><span class="dot"></span>برجاء إرسال النموذج عند تسليم الكنترول الفرعي بعد انتهاء الامتحان.</li>
+        <li><span class="dot"></span>هيتم تجهيز ملخص جاهز تبعتيه لوحدة التصحيح الإلكتروني بضغطة واحدة.</li>
+      </ul>
+      <span class="year-chip" id="corrYearChip"></span>
+    </aside>
+
+    <div class="card" id="corr-success-panel" style="grid-column:1/-1; display:none;">
+      <div class="success-head">
+        <div class="check-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h2>نموذج التصحيح جاهز للإرسال</h2>
+        <div class="review-name" id="corrReviewName"></div>
+      </div>
+
+      <div class="review-card" id="corrReviewCard"></div>
+
+      <div class="saved-note" id="corrSavedNote" style="display:none;"></div>
+
+      <p class="hint" style="margin-top:0;">الصفحة مش متصلة بسيرفر — الطريقة المضمونة إنك تنسخي البيانات أو تنزّليها وتبعتيها بنفسك</p>
+      <div class="action-row">
+        <button type="button" class="btn btn-primary" id="corrCopyBtn">📋 نسخ بيانات النموذج</button>
+        <button type="button" class="btn btn-primary" id="corrDownloadTxtBtn">⬇️ تنزيل النموذج كملف</button>
+      </div>
+      <div class="action-row">
+        <a href="#" id="corrMailBtn" class="btn btn-ghost" target="_blank" rel="noopener">📧 محاولة الإرسال عبر البريد (قد لا يعمل تلقائيًا على كل الأجهزة)</a>
+      </div>
+      <div class="action-row">
+        <button type="button" class="btn btn-ghost" id="corrNewBtn">إرسال نموذج تاني</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="overlay" id="soonOverlay">
   <div class="modal">
     <div class="icon-badge" id="soonIcon" style="margin:0 auto 14px;"></div>
@@ -1025,7 +1280,7 @@
 
   var SOON_LABEL = {
     family:"المشاركة في الأسر الطلابية", question:"أسئلة واستفسارات للطلاب", edit:"طلبات الحذف والإضافة",
-    search:"البحث الاجتماعي", cert:"الشهادات", scale:"التظلمات", monitor:"التصحيح الإلكتروني"
+    search:"البحث الاجتماعي", cert:"الشهادات", scale:"التظلمات"
   };
 
   var MODULES = {
@@ -1081,7 +1336,7 @@
     {key:"search", label:"البحث الاجتماعي", icon:"search"},
     {key:"cert", label:"الشهادات", icon:"cert"},
     {key:"scale", label:"التظلمات", icon:"scale"},
-    {key:"monitor", label:"التصحيح الإلكتروني", icon:"monitor"}
+    {key:"monitor", label:"التصحيح الإلكتروني", icon:"monitor", live:true}
   ];
 
   var hubGrid = document.getElementById('hubGrid');
@@ -1096,6 +1351,7 @@
     el.addEventListener('click', function(){
       var proceed = function(){
         if (MODULES[t.key]) { openModule(t.key); }
+        else if (t.key === 'monitor') { showScreen('correction'); }
         else { openSoon(t); }
       };
       var motion = document.body.getAttribute('data-motion');
@@ -1127,8 +1383,10 @@
     document.getElementById('screen-hub').style.display = name === 'hub' ? 'block' : 'none';
     document.getElementById('screen-form').style.display = name === 'form' ? 'block' : 'none';
     document.getElementById('screen-admin').style.display = name === 'admin' ? 'block' : 'none';
+    document.getElementById('screen-correction').style.display = name === 'correction' ? 'block' : 'none';
     window.scrollTo({top:0, behavior:'smooth'});
   }
+  document.getElementById('corrBackBtn').addEventListener('click', function(){ showScreen('hub'); });
 
   function openModule(key){
     var m = MODULES[key];
@@ -1186,6 +1444,10 @@
     return m >= 9 ? (y + '/' + (y+1)) : ((y-1) + '/' + y);
   }
   document.getElementById('yearChip').textContent = 'العام الدراسي ' + academicYear();
+  var corrYearChipEl = document.getElementById('corrYearChip');
+  if (corrYearChipEl) corrYearChipEl.textContent = 'العام الدراسي ' + academicYear();
+  var corrAcadYearTextEl = document.getElementById('corrAcadYearText');
+  if (corrAcadYearTextEl) corrAcadYearTextEl.textContent = academicYear().replace('/', ' / ');
   seedDemoIfEmpty();
 
   /* ---- departments & programs ---- */
@@ -1492,6 +1754,33 @@
     document.getElementById('statAll').textContent = adminData.length;
     document.getElementById('statIdea').textContent = adminData.filter(function(x){ return x.type === 'idea'; }).length;
     document.getElementById('statQuestion').textContent = adminData.filter(function(x){ return x.type === 'question'; }).length;
+    document.getElementById('statCorrection').textContent = adminData.filter(function(x){ return x.type === 'correction'; }).length;
+  }
+
+  function typeLabelOf(x){
+    if (x.type === 'correction') return 'نموذج تصحيح';
+    if (x.type === 'question') return 'استفسار';
+    return 'فكرة إبداعية';
+  }
+
+  function metaPairsOf(x){
+    if (x.type === 'correction'){
+      return [
+        ['الموبايل', x.phone],
+        ['المقرر', x.dept + (x.corrCourseCode ? ' (' + x.corrCourseCode + ')' : '')],
+        ['تاريخ الامتحان', x.corrExamDate],
+        ['المستوى', x.year],
+        ['اللائحة', x.program],
+        ['درجة الامتحان', x.corrTotalMark],
+        ['عدد النماذج', x.corrModelsCount],
+        ['الفصل الدراسي', x.corrTerm],
+        ['العام الجامعي', x.academicYear]
+      ];
+    }
+    return [
+      ['البريد', x.email], ['الهاتف', x.phone], ['الفرقة', x.year], ['القسم', x.dept],
+      ['البرنامج', x.program], ['العام الدراسي', x.academicYear]
+    ];
   }
 
   function renderList(){
@@ -1514,7 +1803,7 @@
       var card = document.createElement('div');
       card.className = 'sub-card';
 
-      var typeLabel = x.type === 'question' ? 'استفسار' : 'فكرة إبداعية';
+      var typeLabel = typeLabelOf(x);
       var d = new Date(x.createdAt);
       var dateStr = isNaN(d) ? '' : d.toLocaleDateString('ar-EG') + ' · ' +
         d.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
@@ -1525,7 +1814,7 @@
       nameEl.className = 'sub-name';
       nameEl.textContent = x.name;
       var chip = document.createElement('span');
-      chip.className = 'type-chip ' + (x.type === 'question' ? 'question' : 'idea');
+      chip.className = 'type-chip ' + (x.type === 'correction' ? 'correction' : x.type === 'question' ? 'question' : 'idea');
       chip.textContent = typeLabel;
       var dateEl = document.createElement('span');
       dateEl.className = 'sub-date';
@@ -1541,8 +1830,7 @@
 
       var meta = document.createElement('div');
       meta.className = 'sub-meta';
-      [['البريد', x.email], ['الهاتف', x.phone], ['الفرقة', x.year], ['القسم', x.dept], ['البرنامج', x.program], ['العام الدراسي', x.academicYear]]
-        .forEach(function(pair){
+      metaPairsOf(x).forEach(function(pair){
           if (!pair[1]) return;
           var s = document.createElement('span');
           var b = document.createElement('b');
@@ -1584,7 +1872,7 @@
 
       var replyB = document.createElement('button');
       replyB.className = 'mini-btn reply-btn';
-      replyB.textContent = x.type === 'question' ? '📧 الرد على الاستفسار' : '📧 السؤال عن الفكرة';
+      replyB.textContent = x.type === 'correction' ? '📧 تواصل مع أستاذ المقرر' : x.type === 'question' ? '📧 الرد على الاستفسار' : '📧 السؤال عن الفكرة';
       if (!x.email){
         replyB.disabled = true;
         replyB.title = 'الطالب لم يُدخل بريدًا إلكترونيًا';
@@ -1613,6 +1901,14 @@
 
   function formatOne(x){
     var d = new Date(x.createdAt);
+    if (x.type === 'correction'){
+      return [
+        'نموذج تصحيح إلكتروني',
+        'تاريخ الإرسال: ' + (isNaN(d) ? '' : d.toLocaleString('ar-EG')),
+        '',
+        x.text
+      ].join('\n');
+    }
     return [
       (x.type === 'question' ? 'استفسار' : 'فكرة إبداعية'),
       'اسم الطالب: ' + x.name,
@@ -1727,11 +2023,11 @@
 
   document.getElementById('exportExcelBtn').addEventListener('click', function(){
     if (!adminData.length){ showToast('مفيش طلبات للتصدير'); return; }
-    var head = ['النوع','اسم الطالب','البريد الإلكتروني','رقم الهاتف','الفرقة','القسم','البرنامج النوعي','النص','العام الدراسي','التاريخ'];
+    var head = ['النوع','الاسم','البريد الإلكتروني','رقم الهاتف','الفرقة/المستوى','القسم/المقرر','البرنامج/اللائحة','النص','العام الدراسي','التاريخ'];
     var rows = adminData.map(function(x){
       var d = new Date(x.createdAt);
       return [
-        x.type === 'question' ? 'استفسار' : 'فكرة إبداعية',
+        typeLabelOf(x),
         x.name, x.email, x.phone, x.year, x.dept, x.program, x.text, x.academicYear,
         isNaN(d) ? '' : d.toLocaleString('ar-EG')
       ];
@@ -1781,7 +2077,8 @@
 
   function renderQuality(){
     var host = document.getElementById('view-quality');
-    var data = adminData;
+    // تقرير الجودة خاص بمشاركة الطلاب بس — نماذج التصحيح الإلكتروني (خاصة بأعضاء هيئة التدريس) مستبعدة
+    var data = adminData.filter(function(x){ return x.type !== 'correction'; });
 
     if (!data.length){
       host.innerHTML = '<div class="card"><div class="empty-state"><div class="big">📊</div>' +
@@ -2226,6 +2523,274 @@
     } catch(err){
       showToast('تعذر تنزيل الملف الآن — جرّبي النسخ');
     }
+  }
+
+  /* ======================================================================
+     التصحيح الإلكتروني — نموذج مواصفات إجابة التصحيح الإلكتروني
+     ====================================================================== */
+
+  // البرامج الدراسية — 19 برنامج بنفس ترتيب وأسماء النموذج الورقي (4 صفوف)
+  var STUDY_PROGRAMS = [
+    "الرياضيات","كيمياء وفيزياء","الكيمياء الحيوية","كيمياء ونبات","كيمياء وجيولوجيا",
+    "الاحصاء وعلوم الحاسب","جيوفيزياء","كيمياء وحيوان","ميكروبيولوجى","كيمياء وتكنولوجيا حيوية",
+    "الفيزياء","جيولوجيا","حيوان","كيمياء","كيمياء وميكروبيولوجى",
+    "الفيزياء الحيوية","علوم البيئة","كيمياء وجيوفيزياء","كيمياء وكيمياء حيوية"
+  ];
+
+  // البرامج النوعية — 7 برامج بنفس أسماء النموذج الورقي
+  var SPECIAL_PROGRAMS = [
+    "التكنولوجيا الحيوية وتطبيقاتها","جيولوجيا البترول والتعدين","البتروكيماويات وتطبيقاتها",
+    "التحاليل التطبيقية في العلوم البيولوجية","الكيمياء والأدلة الجنائية","الفيزياء الطبية",
+    "الكيمياء الحيوية التطبيقية والبيولوجيا الجزيئية"
+  ];
+
+  var QUESTION_TYPES = [
+    { key:"mcq", label:"سؤال اختر من المتعدد", fields:[
+      ["qnum","رقم السؤال"], ["qcount","عدد الأسئلة"], ["choices","عدد خانات الإجابة"], ["mark","درجة السؤال"]
+    ]},
+    { key:"tf", label:"سؤال صح وخطأ", fields:[
+      ["qnum","رقم السؤال"], ["qcount","عدد الأسئلة"], ["mark","درجة السؤال"]
+    ]},
+    { key:"multi", label:"سؤال اختر من متعدد الخيارات", fields:[
+      ["qnum","رقم السؤال"], ["qcount","عدد الأسئلة"], ["choices","عدد خانات الإجابة"], ["mark","درجة السؤال"]
+    ]},
+    { key:"essay", label:"سؤال مقالي", fields:[
+      ["qnum","رقم السؤال"], ["lines","عدد الأسطر"], ["mark","درجة السؤال"]
+    ]}
+  ];
+
+  function renderCheckGrid(containerId, list, namePrefix){
+    var host = document.getElementById(containerId);
+    if (!host) return;
+    list.forEach(function(label, i){
+      var id = namePrefix + '_' + i;
+      var item = document.createElement('label');
+      item.className = 'check-item';
+      item.innerHTML = '<input type="checkbox" id="' + id + '" value="' + escapeHtml(label) + '"><span>' + escapeHtml(label) + '</span>';
+      host.appendChild(item);
+    });
+  }
+  renderCheckGrid('corrStudyPrograms', STUDY_PROGRAMS, 'studyProg');
+  renderCheckGrid('corrSpecialPrograms', SPECIAL_PROGRAMS, 'specialProg');
+
+  var qtypeGrid = document.getElementById('qtypeGrid');
+  if (qtypeGrid){
+    QUESTION_TYPES.forEach(function(qt){
+      var card = document.createElement('div');
+      card.className = 'qtype-card';
+      card.id = 'qtype-card-' + qt.key;
+
+      var head = document.createElement('label');
+      head.className = 'qtype-head';
+      head.innerHTML = '<input type="checkbox" id="qtype-on-' + qt.key + '"><span>' + qt.label + '</span>';
+
+      var fieldsWrap = document.createElement('div');
+      fieldsWrap.className = 'qtype-fields hidden';
+      fieldsWrap.id = 'qtype-fields-' + qt.key;
+      qt.fields.forEach(function(f){
+        var box = document.createElement('div');
+        box.innerHTML = '<label for="qtype-' + qt.key + '-' + f[0] + '">' + f[1] + '</label>' +
+          '<input type="number" min="0" step="' + (f[0]==='mark' ? '0.25' : '1') + '" id="qtype-' + qt.key + '-' + f[0] + '">';
+        fieldsWrap.appendChild(box);
+      });
+
+      card.appendChild(head);
+      card.appendChild(fieldsWrap);
+      qtypeGrid.appendChild(card);
+
+      var checkbox = head.querySelector('input');
+      checkbox.addEventListener('change', function(){
+        card.classList.toggle('on', checkbox.checked);
+        fieldsWrap.classList.toggle('hidden', !checkbox.checked);
+      });
+    });
+  }
+
+  function collectQuestionTypes(){
+    var out = [];
+    QUESTION_TYPES.forEach(function(qt){
+      var on = document.getElementById('qtype-on-' + qt.key);
+      if (!on || !on.checked) return;
+      var row = { key: qt.key, label: qt.label };
+      qt.fields.forEach(function(f){
+        row[f[0]] = document.getElementById('qtype-' + qt.key + '-' + f[0]).value || '';
+      });
+      out.push(row);
+    });
+    return out;
+  }
+
+  function collectChecked(prefix, list){
+    var out = [];
+    list.forEach(function(label, i){
+      var el = document.getElementById(prefix + '_' + i);
+      if (el && el.checked) out.push(label);
+    });
+    return out;
+  }
+
+  var corrForm = document.getElementById('corrForm');
+  if (corrForm){
+    corrForm.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var acadYear = academicYear().replace('/', ' / ');
+      var term = 'منتصف فصل يناير 2027';
+      var instructor = document.getElementById('corrInstructor').value.trim();
+      var mobile = document.getElementById('corrMobile').value.trim();
+      var courseName = document.getElementById('corrCourseName').value.trim();
+      var courseCode = document.getElementById('corrCourseCode').value.trim();
+      var examDate = document.getElementById('corrExamDate').value;
+      var levelEl = document.querySelector('input[name="corrLevel"]:checked');
+      var level = levelEl ? levelEl.value : '';
+      var regulation = document.getElementById('corrRegulation').value;
+      var totalMark = document.getElementById('corrTotalMark').value;
+      var modelsCount = document.getElementById('corrModelsCount').value;
+      var qTypes = collectQuestionTypes();
+      var studyPrograms = collectChecked('studyProg', STUDY_PROGRAMS);
+      var specialPrograms = collectChecked('specialProg', SPECIAL_PROGRAMS);
+
+      var checks = [
+        ['corr-err-instructor', !instructor],
+        ['corr-err-mobile', !mobile],
+        ['corr-err-coursename', !courseName],
+        ['corr-err-coursecode', !courseCode],
+        ['corr-err-date', !examDate],
+        ['corr-err-level', !level],
+        ['corr-err-regulation', !regulation],
+        ['corr-err-mark', !totalMark],
+        ['corr-err-models', !modelsCount],
+        ['corr-err-qtypes', qTypes.length === 0],
+        ['corr-err-study', studyPrograms.length === 0]
+      ];
+      var ok = true;
+      checks.forEach(function(c){
+        document.getElementById(c[0]).classList.toggle('show', c[1]);
+        if (c[1]) ok = false;
+      });
+      if (!ok){
+        var firstErr = document.querySelector('#corr-form-card .error-msg.show');
+        if (firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+        return;
+      }
+
+      var ay = academicYear();
+      var now = new Date();
+      var dateStr = now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+
+      var qTypeLines = qTypes.map(function(q){
+        var parts = [];
+        if (q.qnum) parts.push('رقم السؤال: ' + q.qnum);
+        if (q.qcount) parts.push('عدد الأسئلة: ' + q.qcount);
+        if (q.choices) parts.push('عدد خانات الإجابة: ' + q.choices);
+        if (q.lines) parts.push('عدد الأسطر: ' + q.lines);
+        if (q.mark) parts.push('درجة السؤال: ' + q.mark);
+        return q.label + ' — ' + parts.join(' · ');
+      });
+
+      var rows = [
+        ['العام الجامعي', acadYear],
+        ['الفصل الدراسي', term],
+        ['رقم الموبايل', mobile],
+        ['اسم المقرر', courseName],
+        ['كود المقرر', courseCode],
+        ['تاريخ الامتحان', examDate],
+        ['المستوى', level],
+        ['اللائحة', regulation],
+        ['درجة الامتحان', totalMark],
+        ['عدد النماذج', modelsCount],
+        ['البرنامج الدراسي', studyPrograms.join('، ')],
+        ['البرنامج النوعي', specialPrograms.length ? specialPrograms.join('، ') : 'غير محدد']
+      ];
+
+      var reviewCard = document.getElementById('corrReviewCard');
+      reviewCard.innerHTML = rows.map(function(r){
+        return '<div class="review-row"><span class="k">' + r[0] + '</span><span class="v">' + escapeHtml(r[1]) + '</span></div>';
+      }).join('') + '<div class="review-idea">' + qTypeLines.map(escapeHtml).join('<br>') + '</div>';
+
+      document.getElementById('corrReviewName').textContent = instructor;
+
+      var bodyLines = [
+        'نموذج مواصفات إجابة التصحيح الإلكتروني — Sheet.B',
+        'وحدة التصحيح الإلكتروني — SCI-ESA-01-FM-04',
+        '',
+        'العام الجامعي: ' + acadYear,
+        'الفصل الدراسي: ' + term,
+        'أستاذ المقرر: ' + instructor,
+        'رقم الموبايل: ' + mobile,
+        'اسم المقرر: ' + courseName,
+        'كود المقرر: ' + courseCode,
+        'تاريخ الامتحان: ' + examDate,
+        'المستوى: ' + level,
+        'اللائحة: ' + regulation,
+        'درجة الامتحان: ' + totalMark,
+        'عدد النماذج: ' + modelsCount,
+        'تاريخ الإرسال: ' + dateStr,
+        '',
+        'نوع ورقم السؤال:',
+        qTypeLines.join('\n'),
+        '',
+        'البرنامج الدراسي: ' + studyPrograms.join('، '),
+        'البرنامج النوعي: ' + (specialPrograms.length ? specialPrograms.join('، ') : 'غير محدد')
+      ];
+      var plainSummary = bodyLines.join('\n');
+
+      var subject = encodeURIComponent('نموذج تصحيح إلكتروني - ' + courseName + ' (' + courseCode + ')');
+      document.getElementById('corrMailBtn').href =
+        'mailto:' + DEST_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(plainSummary);
+
+      document.getElementById('corr-form-card').style.display = 'none';
+      document.getElementById('corr-success-panel').style.display = 'block';
+      window.scrollTo({top:0, behavior:'smooth'});
+
+      var savedNote = document.getElementById('corrSavedNote');
+      savedNote.style.display = 'flex';
+      savedNote.style.color = 'var(--ink-soft)';
+      savedNote.textContent = '⏳ جارٍ حفظ النموذج...';
+
+      Store.add({
+        id: 'sub_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8),
+        type: 'correction',
+        name: instructor,
+        email: '',
+        phone: mobile,
+        year: level,
+        dept: courseName,
+        program: regulation,
+        text: plainSummary,
+        image: null,
+        academicYear: acadYear || ay,
+        createdAt: new Date().toISOString(),
+        corrTerm: term,
+        corrCourseCode: courseCode,
+        corrExamDate: examDate,
+        corrTotalMark: totalMark,
+        corrModelsCount: modelsCount,
+        corrQuestionTypes: qTypes,
+        corrStudyPrograms: studyPrograms,
+        corrSpecialPrograms: specialPrograms
+      }).then(function(){
+        savedNote.style.color = 'var(--success)';
+        savedNote.textContent = '✅ تم حفظ النموذج ووصل للوحة المشرف';
+      }).catch(function(){
+        savedNote.style.color = '#C0392B';
+        savedNote.textContent = '⚠️ تعذر حفظ النموذج — من فضلك استخدم زر النسخ أو التنزيل بالأسفل';
+      });
+
+      document.getElementById('corrCopyBtn').onclick = function(){ copyText(plainSummary); };
+      document.getElementById('corrDownloadTxtBtn').onclick = function(){
+        saveText('نموذج-تصحيح-' + courseCode + '.txt', plainSummary);
+      };
+      document.getElementById('corrNewBtn').onclick = function(){
+        corrForm.reset();
+        document.querySelectorAll('#qtypeGrid .qtype-card').forEach(function(c){ c.classList.remove('on'); });
+        document.querySelectorAll('#qtypeGrid .qtype-fields').forEach(function(f){ f.classList.add('hidden'); });
+        checks.forEach(function(c){ document.getElementById(c[0]).classList.remove('show'); });
+        document.getElementById('corr-form-card').style.display = 'block';
+        document.getElementById('corr-success-panel').style.display = 'none';
+        window.scrollTo({top:0, behavior:'smooth'});
+      };
+    });
   }
 })();
 </script>
